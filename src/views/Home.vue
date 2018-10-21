@@ -28,7 +28,7 @@
     <ion-button @click="this.$parent.refresh" clear>
         <ion-icon name="md-refresh" style="font-size: 25px;"></ion-icon>
       </ion-button>
-    <span class="f7 b" style="float: right;">Displaying: {{ this.$parent.tournaments.length }} tournaments</span>
+    <span class="f7 b" style="float: right;">Showing: {{ this.$parent.filteredTournaments.length }} of {{ this.$parent.tournaments.length }}</span>
 
     <button ion-button block @click="this.$parent.openActionSheet">
       show action sheet
