@@ -24,12 +24,16 @@
   </ion-content>
 </ion-menu>
 
+
+
 <!-- <ion-action-sheet>
 </ion-action-sheet> -->
 
 <ion-page class="show-page" main>
 </ion-page>
 <ion-menu-controller></ion-menu-controller> 
+
+
 
 <!-- <ion-action-sheet-controller></ion-action-sheet-controller> -->
 
@@ -52,9 +56,11 @@ import App from  '@/App.vue'
 import { Plugins } from '@capacitor/core';
 import { ActionSheetOptionStyle } from '@capacitor/core';
 import { messageBus } from '@/main'
+import { filters } from '@/main'
 
 // See docs
 // https://capacitor.ionicframework.com/docs/apis/browser
+
 
 export default {
   name: 'App',
@@ -63,8 +69,10 @@ export default {
       apiURLbase: 'https://api.geekjournal.com',
       //apiURLbase: 'http://localhost:8080',
       tournaments: [],
+      filteredTournaments: [],
       selected: {},
-      refreshingTournaments: false
+      refreshingTournaments: false,
+      filter: filters.ALL
     }
   },
   methods: {
@@ -113,12 +121,53 @@ export default {
       this.fetchTournaments();
       document.querySelector('#home-content').style.display = "none";
     },
+    eventHandlerRedisplayTournamentList (msg) {
+      console.log("redisplay Tournament List called: ", msg);
+      this.filter = msg;
+      this.redisplayTournaments();
+    },
+    redisplayTournaments() {
+      
+      switch(this.filter) {
+        case filters.SIX_HUNDRED:
+          console.log("Filtering to 600")
+          this.filteredTournaments = this.tournaments.filter( t => t.points == "600")
+          console.log("Filtered tments: ", this.filteredTournaments);
+          break;
+        case filters.FOUR_HUNDRED:
+          console.log("Filtering to 400")
+          this.filteredTournaments = this.tournaments.filter( t => t.points == "400")
+          console.log("Filtered tments: ", this.filteredTournaments);
+          break;
+        case filters.TWO_HUNDRED:
+          console.log("Filtering to 200")
+          this.filteredTournaments = this.tournaments.filter( t => t.points == "200")
+          console.log("Filtered tments: ", this.filteredTournaments);
+          break;
+        case filters.ONE_HUNDRED:
+          console.log("Filtering to 100")
+          this.filteredTournaments = this.tournaments.filter( t => t.points == "100")
+          console.log("Filtered tments: ", this.filteredTournaments);
+          break;
+        case filters.OTHER:
+          console.log("Filtering to OTHER")
+          this.filteredTournaments = this.tournaments.filter( t => t.points == "?")
+          console.log("Filtered tments: ", this.filteredTournaments);
+          break;
+        case filters.ALL:
+        default:
+        this.filteredTournaments = this.tournaments;
+          console.log("Filtering to ALL")
+          break;
+      } // end switch
+    },
     fetchTournaments() {
       console.log("fetching touraments")
       this.$http.get(this.apiURLbase + '/tournaments')
         .then(function(response) {
           console.log(response.body)
           this.tournaments = response.body;
+          this.redisplayTournaments();
         }, (response) => {
           console.log("failed to get tournaments", response.body)
         });
@@ -136,6 +185,7 @@ export default {
     document.addEventListener("backbutton", this.goBack, false);  
     
     messageBus.$on('refreshTournamentList', this.eventHandlerRefreshTournamentList);
+    messageBus.$on('redisplayTournamentList', this.eventHandlerRedisplayTournamentList);
     
     this.fetchTournaments();
   },

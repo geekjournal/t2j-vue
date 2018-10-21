@@ -4,6 +4,7 @@ import Home from './views/Home.vue'
 import About  from  './views/About.vue'
 import TournamentDetailNav  from  './views/TournamentDetailNav.vue'
 import DrawNav  from  './views/DrawNav.vue'
+import FilterTournaments  from  './components/FilterTournaments.vue'
 
 
 Vue.use(Router)
@@ -15,6 +16,7 @@ export default new Router({
     { path: '/', name: 'home',component: Home },
     { path: '/nav/:id', name: 'TournamentDetailNav',component: TournamentDetailNav },
     { path: '/drawnav/:id', name: 'DrawNav',component: DrawNav },
+    { path: '/filter', name: 'FilterTournaments',component: FilterTournaments },
     {
       path: '/about',
       name: 'about',

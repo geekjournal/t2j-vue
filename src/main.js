@@ -19,6 +19,15 @@ if(platform() != "browser") {
   SplashScreen.hide();
 }
 
+export const filters = {
+  ALL: 'all',
+  SIX_HUNDRED: '600',
+  FOUR_HUNDRED: '400',
+  TWO_HUNDRED: '200',
+  ONE_HUNDRED: '100',
+  OTHER: 'other'
+}
+
 Vue.config.ignoredElements = [/^ion-/]
 
 Vue.config.productionTip = false
