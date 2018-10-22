@@ -1,6 +1,0 @@
-{
-  "appId": "com.geekjournal.mobile",
-  "appName": "Traveling Circus",
-  "bundledWebRuntime": false,
-  "webDir": "dist"
-}
