@@ -111,7 +111,8 @@ export default {
 
     },
     goToAbout () {
-      this.$router.push('about')
+      this.closeMainMenu();
+      this.$router.push('about');
     }, // end goToAbout
     openExternalURL(url) {
       open(url, '_blank'); 

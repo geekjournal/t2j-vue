@@ -74,11 +74,11 @@ export default {
 } */
 .filter-tournaments-enter-active {
   /* transition: opacity, transform 400ms ease-in; */
-   -webkit-transition: all 0.3s ease-in;
-   -moz-transition: all 0.3s ease-in;
-   -o-transition: all 0.3s ease-in;
-   -ms-transition: all 0.3s ease-in;
-   transition: all 0.3s ease-in;
+   -webkit-transition: all 0.13s ease-in;
+   -moz-transition: all 0.13s ease-in;
+   -o-transition: all 0.13s ease-in;
+   -ms-transition: all 0.13s ease-in;
+   transition: all 0.13s ease-in;
 }
 
 .filter-tournaments-leave-to {
@@ -92,11 +92,11 @@ export default {
 
 .filter-tournaments-leave-active {
   /* transition: opacity, transform 400ms ease-in; */
-   -webkit-transition: all 0.3s ease-out;
-   -moz-transition: all 0.3s ease-out;
-   -o-transition: all 0.3s ease-out;
-   -ms-transition: all 0.3s ease-out;
-   transition: all 0.3s ease-out;
+   -webkit-transition: all 0.13s ease-out;
+   -moz-transition: all 0.13s ease-out;
+   -o-transition: all 0.13s ease-out;
+   -ms-transition: all 0.13s ease-out;
+   transition: all 0.13s ease-out;
 }
 
 .verticalCenterContainer {
