@@ -8,38 +8,56 @@
     <ion-title>
      The Traveling Circus
     </ion-title>
+    
     <ion-buttons slot="start">
       <ion-button @click="this.$parent.openMainMenu">
         <ion-icon name="md-menu" style="font-size: 25px;"></ion-icon>
       </ion-button>
     </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button @click="filterTournaments">
+        <ion-icon name="md-funnel" style="font-size: 25px;"></ion-icon>
+      </ion-button>
+      <ion-button @click="search = !search">
+        <ion-icon name="md-search"  style="font-size: 25px;"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
+
+   <ion-searchbar v-if="search" 
+      v-model="searchText" 
+      @ionInput="keyUpSearchText" 
+      @ionBlur="search = false"
+      placeholder="Filter tournaments">
+   </ion-searchbar>
 
   <!-- Sub HEADER -->
   <div>
-    <ion-button @click="this.$parent.openActionSheet" clear>
+    <!-- <ion-button @click="this.$parent.openActionSheet" clear>
       <span style="float: middle;"><ion-icon large ios="ios-funnel" md="md-funnel" style="font-size: 25px;"></ion-icon></span>
-    </ion-button>
-    <ion-button @click="filterTournaments">
-      <span style="float: middle;"><ion-icon name="md-list" style="font-size: 25px;"></ion-icon></span>
-    </ion-button>
-    <span style="float: left;"> <ion-icon name="md-search" @click="this.$parent.refresh" style="font-size: 25px;"></ion-icon>  </span>
+    </ion-button> -->
+    
+    <!-- <span style="float: left;"> <ion-icon name="md-search" @click="search = !search" style="font-size: 25px;"></ion-icon>  </span> -->
+    
     <!-- <span style="float: right;"> <ion-icon name="md-refresh" style="font-size: 25px;"></ion-icon>  </span> -->
-    <ion-button @click="this.$parent.refresh" clear>
+    
+    <!-- <ion-button @click="this.$parent.refresh" clear>
         <ion-icon name="md-refresh" style="font-size: 25px;"></ion-icon>
-      </ion-button>
-    <span class="f7 b" style="float: right;">
+    </ion-button> -->
+    
+    <span class="f7 b fl ml mh3">
       Showing: {{ this.$parent.filteredTournaments.length }} of {{ this.$parent.tournaments.length }}
-      <br />
-      Filter: {{ this.$parent.filter }} points
+    </span>
+    <span class="f7 b fr mh3">
+      Filter: {{ this.$parent.filter }}
     </span>
 
-    <button ion-button block @click="this.$parent.openActionSheet">
+    <!-- <button ion-button block @click="this.$parent.openActionSheet">
       show action sheet
     </button>
     <ion-button @click="openPopOver">
         Open Popover
-    </ion-button>
+    </ion-button> -->
   </div>
 
 
@@ -73,6 +91,13 @@
 <!-- END Main HEADER -->
 </ion-header>
 
+  <!-- <ion-searchbar v-if="search" 
+    v-model="searchText" 
+    @ionInput="keyUpSearchText" 
+    @ionBlur="search = false"
+    placeholder="Filter tournaments">
+  </ion-searchbar> -->
+  
 
 <ion-content padding v-touch:swipe="swipeDown">
 
@@ -102,15 +127,22 @@
    
   <ion-list v-if="tournaments.length > -1">
     <!-- <ion-item-group> -->   
-      <ion-item-divider color="light">Unsorted</ion-item-divider>
+      <!-- <ion-item-divider color="light">
+        <span class="f7 b fl ml mh3">
+          Showing: {{ this.$parent.filteredTournaments.length }} of {{ this.$parent.tournaments.length }}
+        </span>
+        <span class="f7 b fr mh3">
+          Filter: {{ this.$parent.filter }}
+        </span>
+      </ion-item-divider> -->
         
-        <ion-item v-for="t in this.$parent.filteredTournaments" :key="t.ID" >
+        <!-- <ion-item v-for="t in this.$parent.filteredTournaments" :key="t.ID"> -->
           <!-- <ion-card v-touch:swipe="swipeDown"> -->
-          <ion-card>
-            <div class="f4 mw-100">{{ t.name }}</div>
+          <ion-card v-for="t in this.$parent.filteredTournaments" :key="t.ID">
+            <div class="f5 b">{{ t.name }}</div>
             <button class="f3" ion-label @click="tournamentClicked(t)">Details</button>
           </ion-card>
-        </ion-item> 
+        <!-- </ion-item>  -->
     <!-- </ion-item-group> -->
   </ion-list>
   
@@ -123,6 +155,7 @@
 <script>
 import { Plugins } from '@capacitor/core';
 import { messageBus } from '@/main'
+import { filters } from '@/main'
 
 export default {
   name: 'Home',
@@ -131,9 +164,34 @@ export default {
       apiURLbase: 'https://api.geekjournal.com',
       tournaments: [],
       items: ["a", "b", "c"],
+      search: false,
+      searchText: ''
     }
   }, // end data
   methods: {
+    keyUpSearchText(event) {
+
+      // Reset items back to all of the items
+      this.$parent.redisplayTournaments();
+      this.$parent.filter = filters.CUSTOM;
+
+      //console.log(event.key);
+      console.log(event.target.value);
+      // set val to the value of the searchbar
+      const val = event.target.value;
+      // if the value is an empty string don't filter the items
+      if (val && val.trim() != '') {
+        this.$parent.filteredTournaments = this.$parent.filteredTournaments.filter((item) => {
+          return (
+            item.name.toLowerCase().indexOf(val.toLowerCase()) > -1 ||
+            item.points.toLowerCase().indexOf(val.toLowerCase()) > -1 || 
+            item.city.toLowerCase().indexOf(val.toLowerCase()) > -1 || 
+            item.date.toLowerCase().indexOf(val.toLowerCase()) > -1 || 
+            item.ID.toLowerCase().indexOf(val.toLowerCase()) > -1
+          ); // end return statement
+        })
+      }
+    },
     openPopOver($event) {
       console.log("openPopOver called", $event)
       document.querySelector('#mainPopOver').style.display = 'block';
@@ -190,7 +248,6 @@ export default {
     }
   }, // end methods:
   created: function() {
-    
     
   }, // end created:
   updated: function() {

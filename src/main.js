@@ -21,11 +21,12 @@ if(platform() != "browser") {
 
 export const filters = {
   ALL: 'all',
-  SIX_HUNDRED: '600',
-  FOUR_HUNDRED: '400',
-  TWO_HUNDRED: '200',
-  ONE_HUNDRED: '100',
-  OTHER: 'other'
+  SIX_HUNDRED: '600 points',
+  FOUR_HUNDRED: 'Major Zones',
+  TWO_HUNDRED: '200 points',
+  ONE_HUNDRED: '100 points',
+  OTHER: 'other',
+  CUSTOM: 'custom'
 }
 
 Vue.config.ignoredElements = [/^ion-/]
