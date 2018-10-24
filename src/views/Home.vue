@@ -45,10 +45,10 @@
         <ion-icon name="md-refresh" style="font-size: 25px;"></ion-icon>
     </ion-button> -->
     
-    <span class="f7 b fl ml mh3">
+    <span class="f7 fl ml mh3">
       Showing: {{ this.$parent.filteredTournaments.length }} of {{ this.$parent.tournaments.length }}
     </span>
-    <span class="f7 b fr mh3">
+    <span class="f7 fr mh3">
       Filter: {{ this.$parent.filter }}
     </span>
 
@@ -138,9 +138,21 @@
         
         <!-- <ion-item v-for="t in this.$parent.filteredTournaments" :key="t.ID"> -->
           <!-- <ion-card v-touch:swipe="swipeDown"> -->
-          <ion-card v-for="t in this.$parent.filteredTournaments" :key="t.ID">
-            <div class="f5 b">{{ t.name }}</div>
-            <button class="f3" ion-label @click="tournamentClicked(t)">Details</button>
+          <ion-card class="cf" v-for="t in this.$parent.filteredTournaments" :key="t.ID">
+            
+            <div class="fl w-90 bg-white mv1" @click="tournamentClicked(t)">
+              <span class="f6 b mw-80">{{ t.name }}</span>
+              <br />
+              {{t.date}} - {{ t.city }}
+            </div>
+            <div class="fr w-10 bg-near-white tc mv1">
+              <ion-icon v-if="!isFavorite(t.ID)" @click="addFavorite(t.ID)" name="star-outline" style="font-size: 25px;"></ion-icon>
+              <ion-icon v-if="isFavorite(t.ID)" @click="removeFavorite(t.ID)" name="star" style="font-size: 25px;"></ion-icon> 
+              <br /> {{t.points}}
+            </div>
+            
+            <!-- <span class="f5 b mw-80">{{ t.name }}</span>
+            <button class="f3" ion-label @click="tournamentClicked(t)">Details</button> -->
           </ion-card>
         <!-- </ion-item>  -->
     <!-- </ion-item-group> -->
@@ -165,10 +177,50 @@ export default {
       tournaments: [],
       items: ["a", "b", "c"],
       search: false,
-      searchText: ''
+      searchText: '',
+      favorites: []
     }
   }, // end data
   methods: {
+    addFavorite(ID) {
+      let i = this.favorites.indexOf(ID);
+      if(i > -1) {
+        console.log("item found, carry on")
+        return; // already exists, so carry on
+      }
+      console.log("not found, adding")
+      this.favorites.unshift(ID)
+      this.storeFavorites();
+    },
+    removeFavorite(ID) {
+      let i = this.favorites.indexOf(ID);
+      if(i  > -1) {
+        console.log("Removing item")
+        // item was found, remove it, and save
+        this.favorites.splice(i,1);
+        this.storeFavorites();
+      }
+    },
+    isFavorite(ID) {
+      return (this.favorites.indexOf(ID) > -1 ? true : false);
+    },
+    async storeFavorites() {
+      console.log("Storing favorites: ", this.favorites.toString());
+      await Plugins.Storage.set({
+        key: 'favorites',
+        value: this.favorites.toString()
+      });
+    },
+    async getFavoritesFromStore() {
+      console.log("Loading favorites from store");
+      const favs = await Plugins.Storage.get({ key: 'favorites' });
+      let s = Object.values(favs); 
+      this.favorites = s[0].split(",");
+      console.log("favorites: ", this.favorites)
+    },
+    async removeFavoritesFromStore() {
+      await Plugins.Storage.remove({ key: 'favorites' });
+    },
     keyUpSearchText(event) {
 
       // Reset items back to all of the items
@@ -248,7 +300,7 @@ export default {
     }
   }, // end methods:
   created: function() {
-    
+    this.getFavoritesFromStore();
   }, // end created:
   updated: function() {
     

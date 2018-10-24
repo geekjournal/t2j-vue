@@ -26,7 +26,8 @@ export const filters = {
   TWO_HUNDRED: '200 points',
   ONE_HUNDRED: '100 points',
   OTHER: 'other',
-  CUSTOM: 'custom'
+  CUSTOM: 'custom',
+  FAVORITES: 'favorites'
 }
 
 Vue.config.ignoredElements = [/^ion-/]

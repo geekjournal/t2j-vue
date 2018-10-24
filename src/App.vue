@@ -21,6 +21,9 @@
     <ion-button shape="round" @click="goToAbout" full>About</ion-button>
     <ion-button shape="round" @click="openExternalURL('https://tennislink.usta.com/tournaments/rankings/rankinghome.aspx')" full>Ranking/Record Search</ion-button>
     <ion-button shape="round" @click="openExternalURL('https://tennislink.usta.com/leagues/reports/NTRP/FindRating.aspx')" full>Rating Search</ion-button> 
+    <ion-button shape="round" @click="openExternalURL('https://www.facebook.com/groups/379071872251830/')" full>Facebook Group</ion-button> 
+    <ion-button shape="round" @click="removeFavoritesFromStore" full>Clear Favorites</ion-button> 
+    
   </ion-content>
 </ion-menu>
 
@@ -83,6 +86,10 @@ export default {
     closeMainMenu() {
       console.log("closeMainMenu called")
       document.querySelector('ion-menu-controller').close('start')
+    },
+    async removeFavoritesFromStore() {
+      // TODO: add an are you sure?
+      await Plugins.Storage.remove({ key: 'favorites' });
     },
     async openActionSheet() {
       console.log("openActionSheet called");
