@@ -19,7 +19,7 @@
         <ion-icon name="md-funnel" style="font-size: 25px;"></ion-icon>
       </ion-button>
       <ion-button @click="search = !search">
-        <ion-icon name="md-search"  style="font-size: 25px;"></ion-icon>
+        <ion-icon id="search-icon" name="md-search"  style="font-size: 25px;"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
@@ -100,6 +100,16 @@
   
 
 <ion-content padding v-touch:swipe="swipeDown">
+  <ion-refresher @ionRefresh="doRefresh($event)" @ionPull="pullingRefresh($event)">
+    <!-- <ion-refresher-content> </ion-refresher-content> -->
+    <!-- <ion-refresher-content
+      pullingIcon="arrow-dropdown" 
+      pullingText="Pull to refresh" 
+      refreshingSpinner="circles" 
+      refreshingText="Refreshing...">
+    </ion-refresher-content> -->
+    <div id="puller">pull down to refresh</div>
+  </ion-refresher>
 
   <!-- <div v-if="this.$parent.refreshingTournaments"><center>Refreshing Tournaments List</center></div> -->
   <div style="display: none;" id="home-content"><center>Refreshing Tournaments List</center></div>
@@ -143,7 +153,7 @@
             <div class="fl w-90 bg-white mv1" @click="tournamentClicked(t)">
               <span class="f6 b mw-80">{{ t.name }}</span>
               <br />
-              {{t.date}} - {{ t.city }}
+              {{ t.date }} - {{ t.city }}
             </div>
             <div class="fr w-10 bg-near-white tc mv1">
               <ion-icon v-if="!isFavorite(t.ID)" @click="addFavorite(t.ID)" name="star-outline" style="font-size: 25px;"></ion-icon>
@@ -177,46 +187,64 @@ export default {
       tournaments: [],
       items: ["a", "b", "c"],
       search: false,
-      searchText: '',
-      favorites: []
+      searchText: ''
+     // favorites: []
     }
   }, // end data
   methods: {
+    pullingRefresh() {
+      document.querySelector('#puller').innerHTML = "<center>Pull down, release to refresh</center>"
+    },
+    doRefresh(refresher) {
+      document.querySelector('#puller').innerHTML = "<center>Refreshing...</center>"
+      console.log('Begin async operation', refresher);
+      // must need to send an event to refresh list
+      this.$parent.refreshingTournaments = true;
+      messageBus.$emit('refreshTournamentList', 'refresh');
+      refresher.target.complete();
+      // setTimeout(() => {
+      //   console.log('Async operation has ended');
+      //   refresher.target.complete();
+      // }, 2000);
+      
+    },
     addFavorite(ID) {
-      let i = this.favorites.indexOf(ID);
+      let i = this.$parent.favorites.indexOf(ID);
       if(i > -1) {
         console.log("item found, carry on")
         return; // already exists, so carry on
       }
       console.log("not found, adding")
-      this.favorites.unshift(ID)
+      this.$parent.favorites.unshift(ID)
       this.storeFavorites();
     },
     removeFavorite(ID) {
-      let i = this.favorites.indexOf(ID);
+      let i = this.$parent.favorites.indexOf(ID);
       if(i  > -1) {
         console.log("Removing item")
         // item was found, remove it, and save
-        this.favorites.splice(i,1);
+        this.$parent.favorites.splice(i,1);
         this.storeFavorites();
       }
     },
     isFavorite(ID) {
-      return (this.favorites.indexOf(ID) > -1 ? true : false);
+      return (this.$parent.favorites.indexOf(ID) > -1 ? true : false);
     },
     async storeFavorites() {
-      console.log("Storing favorites: ", this.favorites.toString());
+      console.log("Storing favorites: ", this.$parent.favorites.toString());
       await Plugins.Storage.set({
         key: 'favorites',
-        value: this.favorites.toString()
+        value: this.$parent.favorites.toString()
       });
     },
     async getFavoritesFromStore() {
       console.log("Loading favorites from store");
       const favs = await Plugins.Storage.get({ key: 'favorites' });
       let s = Object.values(favs); 
-      this.favorites = s[0].split(",");
-      console.log("favorites: ", this.favorites)
+      if(s.length > 0) {
+        this.$parent.favorites = s[0].split(",");
+      }
+      console.log("favorites: ", this.$parent.favorites)
     },
     async removeFavoritesFromStore() {
       await Plugins.Storage.remove({ key: 'favorites' });
@@ -291,12 +319,12 @@ export default {
     },  // end fetchTournaments    
     swipeDown(swipeDirection) {
       console.log("Swipe down called:", swipeDirection)
-      this.$parent.refreshingTournaments = true;
+      // this.$parent.refreshingTournaments = true;
 
-      document.querySelector('#home-content').style.display = "block";
+      // document.querySelector('#home-content').style.display = "block";
 
       // must need to send an event to refresh list
-      messageBus.$emit('refreshTournamentList');
+      // messageBus.$emit('refreshTournamentList', 'refresh');
     }
   }, // end methods:
   created: function() {
@@ -308,7 +336,7 @@ export default {
   components: {
 
   }
-}
+}    
 </script>
 
 <style>

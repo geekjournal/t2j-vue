@@ -19,8 +19,8 @@
     <div>
       <center>
       <ion-title class="mb2">Select Filter</ion-title>
-      <!-- <a @click="filter(filters.FAVORITES)" class="f6 link dim ba ph3 pv2 mb2 dib black w-100 br3" href="#0">Favorites</a> -->
       <a @click="filter(filters.ALL)" class="f6 link dim ba ph3 pv2 mb2 dib black w-100 br3" href="#0">Show All</a>
+      <a @click="filter(filters.FAVORITES)" class="f6 link dim ba ph3 pv2 mb2 dib black w-100 br3" href="#0">Favorites</a>
       <a @click="filter(filters.FOUR_HUNDRED)" class="f6 link dim ba ph3 pv2 mb2 dib black w-100 br3" href="#0">400 pts (Major Zones)</a>
       <a @click="filter(filters.SIX_HUNDRED)" class="f6 link dim ba ph3 pv2 mb2 dib black w-100 br3" href="#0">600 points</a>
       <a @click="filter(filters.TWO_HUNDRED)" class="f6 link dim ba ph3 pv2 mb2 dib black w-100 br3" href="#0">200 points</a>

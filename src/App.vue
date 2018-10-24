@@ -75,7 +75,8 @@ export default {
       filteredTournaments: [],
       selected: {},
       refreshingTournaments: false,
-      filter: filters.ALL
+      filter: filters.ALL,
+      favorites: []
     }
   },
   methods: {
@@ -98,12 +99,7 @@ export default {
         header: 'Title',
         message: 'Select an option to perform',
         options: [
-          {
-            title: 'Upload'
-          },
-          {
-            title: 'Share'
-          },
+          {title: 'Upload'},
           {
             title: 'Remove',
             style: ActionSheetOptionStyle.Destructive
@@ -115,7 +111,6 @@ export default {
         ]
       })
       console.log('You selected', promptRet);
-
     },
     goToAbout () {
       this.closeMainMenu();
@@ -127,6 +122,7 @@ export default {
     eventHandlerRefreshTournamentList(msg) {
       console.log("Received Refresh Tournaments EVENT: ", msg)
       this.fetchTournaments();
+      this.refreshingTournaments = false;
       document.querySelector('#home-content').style.display = "none";
     },
     eventHandlerRedisplayTournamentList (msg) {
@@ -135,7 +131,6 @@ export default {
       this.redisplayTournaments();
     },
     redisplayTournaments() {
-      
       switch(this.filter) {
         case filters.SIX_HUNDRED:
           console.log("Filtering to 600")
@@ -161,6 +156,9 @@ export default {
           console.log("Filtering to OTHER")
           this.filteredTournaments = this.tournaments.filter( t => t.points == "?")
           console.log("Filtered tments: ", this.filteredTournaments);
+          break;
+        case filters.FAVORITES:
+          this.filteredTournaments = this.tournaments.filter( t => this.favorites.indexOf(t.ID) > -1 ? true : false ); 
           break;
         case filters.ALL:
         default:
