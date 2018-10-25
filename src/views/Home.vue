@@ -5,16 +5,21 @@
 <!-- Main HEADER -->
 <ion-header>
   <ion-toolbar color="primary">
-    <ion-title>
+    <ion-title  v-show="!search">
      The Traveling Circus
     </ion-title>
     
-    <ion-buttons slot="start">
+    <ion-buttons slot="start" v-show="search">
+      <ion-button @click="hideSearchBar(null)" bg-white>
+        <ion-icon name="arrow-back" style="font-size: 25px;"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="start"  v-show="!search">
       <ion-button @click="this.$parent.openMainMenu">
         <ion-icon name="md-menu" style="font-size: 25px;"></ion-icon>
       </ion-button>
     </ion-buttons>
-    <ion-buttons slot="end">
+    <ion-buttons slot="end"  v-show="!search">
       <ion-button @click="filterTournaments">
         <ion-icon name="md-funnel" style="font-size: 25px;"></ion-icon>
       </ion-button>
@@ -23,17 +28,26 @@
         <ion-icon id="search-icon" name="md-search"  style="font-size: 25px;"></ion-icon>
       </ion-button>
     </ion-buttons>
-  
+
+    <ion-searchbar id="searchBar" v-show="search" 
+      v-model="searchText" 
+      @ionInput="keyUpSearchText" 
+      @ionBlur="hideSearchBar($event)"
+      placeholder="Filter tournaments" 
+      v-observe-visibility="{ callback: setSearchVisibility, throttle: 300 }"
+    >
+    </ion-searchbar>
+
   </ion-toolbar>
 
-  <ion-searchbar id="searchBar" v-show="search" 
+  <!-- <ion-searchbar id="searchBar" v-show="search" 
     v-model="searchText" 
     @ionInput="keyUpSearchText" 
     @ionBlur="hideSearchBar"
     placeholder="Filter tournaments" 
     v-observe-visibility="{ callback: setSearchVisibility, throttle: 300 }"
   >
-  </ion-searchbar>
+  </ion-searchbar> -->
 
    
 
@@ -198,17 +212,21 @@ export default {
     }
   }, // end data
   methods: {
-    hideSearchBar() {
+    hideSearchBar(e) {
       console.log("hide search bar called")
       if(!this.search) {
         console.log("search already false, doing nothing")
         document.getElementById("searchBar").style.display = "none";
-        return;
       } else {
         console.log("search is true, hiding anyway")
-        
         document.getElementById("searchBar").style.display = "none";
       }
+      this.searchText = ''; // reset search text, not working? 
+      if(e) {   // guess we have to do this instead
+        e.target.value = '';
+      }
+      this.$parent.filter = filters.ALL; // reset filter
+      this.$parent.redisplayTournaments(); // redisplay tournaments
     },
     setSearchVisibility(visible) {
       console.log("setSearchVisibility called with (call, search): ", visible, this.search)
