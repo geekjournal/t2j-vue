@@ -18,18 +18,23 @@
       <ion-button @click="filterTournaments">
         <ion-icon name="md-funnel" style="font-size: 25px;"></ion-icon>
       </ion-button>
+      <!-- <ion-button @click="setSearchVisibility()"> -->
       <ion-button @click="search = !search">
         <ion-icon id="search-icon" name="md-search"  style="font-size: 25px;"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
 
-   <ion-searchbar v-if="search" 
+   <ion-searchbar id="searchBar" v-show="search" 
       v-model="searchText" 
       @ionInput="keyUpSearchText" 
-      @ionBlur="search = false"
-      placeholder="Filter tournaments">
+      @ionBlur="setSearchVisibility(false)"
+      placeholder="Filter tournaments" 
+      v-observe-visibility="{ callback: setSearchVisibility, throttle: 300 }"
+    >
    </ion-searchbar>
+
+   
 
   <!-- Sub HEADER -->
   <div>
@@ -192,6 +197,23 @@ export default {
     }
   }, // end data
   methods: {
+
+    setSearchVisibility(visible) {
+      console.log("setSearchVisibility called with: ", visible)
+      
+      if(visible) {
+        // set focus, and pop up keyboard
+        // Must set timeout so DOM renders before we set focus
+        setTimeout(() => {
+          document.getElementById("searchBar").setFocus();
+          // Plugins.Keyboard.setAccessoryBarVisible({isVisible: false});
+          // Plugins.Keyboard.show();
+        }, 150);
+      } else {
+        document.getElementById("searchBar").display = "none";
+      }
+      
+    },
     pullingRefresh() {
       document.querySelector('#puller').innerHTML = "<center>Pull down, release to refresh</center>"
     },

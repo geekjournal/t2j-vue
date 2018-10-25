@@ -19,6 +19,7 @@
     "popper.js": "^1.14.4",
     "tachyons": "^4.11.1",
     "vue": "^2.5.17",
+    "vue-observe-visibility": "^0.4.3",
     "vue-resource": "^1.5.1",
     "vue-router": "^3.0.1",
     "vue2-touch": "^1.0.8"
