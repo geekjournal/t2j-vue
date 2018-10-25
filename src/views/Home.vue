@@ -23,16 +23,17 @@
         <ion-icon id="search-icon" name="md-search"  style="font-size: 25px;"></ion-icon>
       </ion-button>
     </ion-buttons>
+  
   </ion-toolbar>
 
-   <ion-searchbar id="searchBar" v-show="search" 
-      v-model="searchText" 
-      @ionInput="keyUpSearchText" 
-      @ionBlur="setSearchVisibility(false)"
-      placeholder="Filter tournaments" 
-      v-observe-visibility="{ callback: setSearchVisibility, throttle: 300 }"
-    >
-   </ion-searchbar>
+  <ion-searchbar id="searchBar" v-show="search" 
+    v-model="searchText" 
+    @ionInput="keyUpSearchText" 
+    @ionBlur="hideSearchBar"
+    placeholder="Filter tournaments" 
+    v-observe-visibility="{ callback: setSearchVisibility, throttle: 300 }"
+  >
+  </ion-searchbar>
 
    
 
@@ -197,9 +198,20 @@ export default {
     }
   }, // end data
   methods: {
-
+    hideSearchBar() {
+      console.log("hide search bar called")
+      if(!this.search) {
+        console.log("search already false, doing nothing")
+        document.getElementById("searchBar").style.display = "none";
+        return;
+      } else {
+        console.log("search is true, hiding anyway")
+        
+        document.getElementById("searchBar").style.display = "none";
+      }
+    },
     setSearchVisibility(visible) {
-      console.log("setSearchVisibility called with: ", visible)
+      console.log("setSearchVisibility called with (call, search): ", visible, this.search)
       
       if(visible) {
         // set focus, and pop up keyboard
@@ -210,7 +222,10 @@ export default {
           // Plugins.Keyboard.show();
         }, 150);
       } else {
-        document.getElementById("searchBar").display = "none";
+        document.getElementById("searchBar").style.display = "none";
+        if(this.search) { // have to flip it if search is true but we were called to hide it, not sure why
+          this.search = false;
+        }
       }
       
     },
