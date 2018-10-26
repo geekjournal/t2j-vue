@@ -65,10 +65,10 @@
         <ion-icon name="md-refresh" style="font-size: 25px;"></ion-icon>
     </ion-button> -->
     
-    <span class="f7 fl ml mh3">
+    <span class="f7 fl ml mh3 mv1 dark-blue">
       Showing: {{ this.$parent.filteredTournaments.length }} of {{ this.$parent.tournaments.length }}
     </span>
-    <span class="f7 fr mh3">
+    <span class="f7 fr mh3 mv1 dark-blue">
       Filter: {{ this.$parent.filter }}
     </span>
 
@@ -94,7 +94,7 @@
       <!-- <span id="secondPopOverCloseButton" class="close" @click="closePopOver($event)">&times;</span> -->
       <!-- <ion-button class="popover-button w-100" block outline>Outline + Block</ion-button> -->
       <ion-title class="mb2">Select Filter</ion-title>
-      <a id="idPopOverShowAll" @click="closePopOver($event)" class="f6 link dim ba ph3 pv2 mb2 dib black w-100 br3" href="#0">Show All</a>
+      <a id="idPopOverShowAll" @click="closePopOver($event)" class="f6 link dim ba ph3 pv2 mb2 dib  w-100 br3" href="#0">Show All</a>
       <a id="idPopOverShowMZ" @click="closePopOver($event)" class="f6 link dim ba ph3 pv2 mb2 dib black w-100 br3" href="#0">400 pts (Major Zones)</a>
       <a id="idPopOverShow600" @click="closePopOver($event)" class="f6 link dim ba ph3 pv2 mb2 dib black w-100 br3" href="#0">600 points</a>
       <a id="idPopOverShow200" @click="closePopOver($event)" class="f6 link dim ba ph3 pv2 mb2 dib black w-100 br3" href="#0">200 points</a>
@@ -121,14 +121,14 @@
 
 <ion-content padding v-touch:swipe="swipeDown">
   <ion-refresher @ionRefresh="doRefresh($event)" @ionPull="pullingRefresh($event)">
-    <!-- <ion-refresher-content> </ion-refresher-content> -->
-    <!-- <ion-refresher-content
+    <!-- <ion-refresher-content 
       pullingIcon="arrow-dropdown" 
       pullingText="Pull to refresh" 
       refreshingSpinner="circles" 
       refreshingText="Refreshing...">
     </ion-refresher-content> -->
-    <div id="puller">pull down to refresh</div>
+    
+   <div id="puller">pull down to refresh</div>
   </ion-refresher>
 
   <!-- <div v-if="this.$parent.refreshingTournaments"><center>Refreshing Tournaments List</center></div> -->
@@ -170,15 +170,15 @@
           <!-- <ion-card v-touch:swipe="swipeDown"> -->
           <ion-card class="cf" v-for="t in this.$parent.filteredTournaments" :key="t.ID">
             
-            <div class="fl w-90 bg-white mv1" @click="tournamentClicked(t)">
-              <span class="f6 b mw-80">{{ t.name }}</span>
+            <div class="fl w-90 bg-white mv1 pl2 pv2" @click="tournamentClicked(t)">
+              <span class="f6 b dark-gray mw-80">{{ t.name }}</span>
               <br />
-              {{ t.date }} - {{ t.city }}
+              <span class="mid-gray">{{ t.date }} - {{ t.city }}</span>
             </div>
-            <div class="fr w-10 bg-near-white tc mv1">
-              <ion-icon v-if="!isFavorite(t.ID)" @click="addFavorite(t.ID)" name="star-outline" style="font-size: 25px;"></ion-icon>
-              <ion-icon v-if="isFavorite(t.ID)" @click="removeFavorite(t.ID)" name="star" style="font-size: 25px;"></ion-icon> 
-              <br /> {{t.points}}
+            <div class="fr w-10 bg-white tc mv1 pv1">
+              <ion-icon v-if="!isFavorite(t.ID)" @click="addFavorite(t.ID)" name="star-outline" class="yellow" style="font-size: 25px;"></ion-icon>
+              <ion-icon v-if="isFavorite(t.ID)" @click="removeFavorite(t.ID)" name="star" class="yellow" style="font-size: 25px;"></ion-icon> 
+              <br /> <span class="dark-blue">{{t.points}}</span>
             </div>
             
             <!-- <span class="f5 b mw-80">{{ t.name }}</span>
@@ -248,7 +248,7 @@ export default {
       
     },
     pullingRefresh() {
-      document.querySelector('#puller').innerHTML = "<center>Pull down, release to refresh</center>"
+      document.querySelector('#puller').innerHTML = '<center>continue pulling to refresh</center>'
     },
     doRefresh(refresher) {
       document.querySelector('#puller').innerHTML = "<center>Refreshing...</center>"
@@ -354,11 +354,11 @@ export default {
       console.log("Filter tournaments clicked")
       this.$router.push("/filter")
     },
-    async showDialogAlert(){
+    async showDialogAlert(msg){
       console.log("Enter showDialog");
       await Plugins.Modals.alert({
           title: 'Alert',
-          message: 'This is an example alert box'
+          message: msg
       });
     }, // showDialogAlert
     fetchTournaments() {
@@ -435,5 +435,6 @@ export default {
       text-decoration: none;
       cursor: pointer;
   }
+
 
 </style>

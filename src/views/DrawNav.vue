@@ -21,13 +21,15 @@
 
   <!-- <ion-button @click="goBack()" full>Go Back!</ion-button> -->
 
-  
-  <div v-for="(item, index) in this.$parent.selected.drawCategories" :key="item">
-    <button @click="selectionMade(item, index)">
-      <ion-label>
-        <strong>{{ item }}, {{ index }}</strong>
-      </ion-label>
-    </button>
+  <div>
+    <center v-for="(item, index) in this.$parent.selected.drawCategories" :key="item" class="pr2 mv3">
+      <button @click="selectionMade(item, index)" class="br3 center w-75">
+        <ion-label class="mv3">
+          <!-- <strong>{{ item }}, {{ index }}</strong> -->
+          <strong>{{ item }}</strong>
+        </ion-label>
+      </button>
+    </center>
   </div>
   
 

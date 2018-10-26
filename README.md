@@ -21,7 +21,7 @@ npm run lint
 ```
 
 ## Build for Android
-1. `npm run build`
+1. `npm run build-release`
 1. `npx cap copy`
 1. `npx cap open android`
 

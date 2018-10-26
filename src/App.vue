@@ -9,21 +9,83 @@
 <ion-menu side="start">
   <ion-header>
     <ion-toolbar color="secondary">
-      <ion-title>Left Menu  
-      </ion-title>
-      <ion-icon name="close" @click="closeMainMenu" style="font-size: 25px;"></ion-icon>
+      <ion-title>Circus Menu</ion-title>
+      <!-- <ion-icon name="close" @click="closeMainMenu" style="font-size: 25px;"></ion-icon> -->
     </ion-toolbar>
   </ion-header>
   <ion-content padding>
-    <button ion-button> 
+    <!-- <button ion-button> 
       <ion-label>START MENU CONTENTS</ion-label>
-    </button>
-    <ion-button shape="round" @click="goToAbout" full>About</ion-button>
+    </button> -->
+    <!-- <ion-button shape="round" @click="goToAbout" full>About</ion-button>
     <ion-button shape="round" @click="openExternalURL('https://tennislink.usta.com/tournaments/rankings/rankinghome.aspx')" full>Ranking/Record Search</ion-button>
     <ion-button shape="round" @click="openExternalURL('https://tennislink.usta.com/leagues/reports/NTRP/FindRating.aspx')" full>Rating Search</ion-button> 
     <ion-button shape="round" @click="openExternalURL('https://www.facebook.com/groups/379071872251830/')" full>Facebook Group</ion-button> 
-    <ion-button shape="round" @click="removeFavoritesFromStore" full>Clear Favorites</ion-button> 
+    <ion-button shape="round" @click="removeFavoritesFromStore" full>Clear Favorites</ion-button>  -->
     
+    <div class="cf pv2" @click="openExternalURL('https://tennislink.usta.com/tournaments/rankings/rankinghome.aspx')">
+      <div class="fl w-20 tc">
+          <ion-icon name="tennisball" style="font-size: 25px;"></ion-icon>
+      </div>
+      <div class="fr w-80 f4">
+        Rankings/Records
+      </div>
+    </div>
+
+    <div class="cf pv2" @click="openExternalURL('https://tennislink.usta.com/leagues/reports/NTRP/FindRating.aspx')">
+      <div class="fl w-20 tc">
+          <ion-icon name="search" style="font-size: 25px;"></ion-icon>
+      </div>
+      <div class="fr w-80 f4">
+        Ratings Search
+      </div>
+    </div>
+
+    <div class="cf pv2" @click="openExternalURL(ustaSearchSite)">
+      <div class="fl w-20 tc">
+          <ion-icon name="square-outline" style="font-size: 25px;"></ion-icon>
+      </div>
+      <div class="fr w-80 f4">
+        USTA Search
+      </div>
+    </div>
+
+    <div class="cf pv2 bt" @click="removeFavoritesFromStore">
+      <div class="fl w-20 tc">
+          <ion-icon name="star" style="font-size: 25px;"></ion-icon>
+      </div>
+      <div class="fr w-80 f4">
+        Clear Favorites
+      </div>
+    </div>
+
+    <div class="cf pv2 bt" @click="openExternalURL('https://www.facebook.com/groups/379071872251830/')">
+      <div class="fl w-20 tc">
+          <ion-icon name="logo-facebook" style="font-size: 25px;"></ion-icon>
+      </div>
+      <div class="fr w-80 f4">
+        Facebook Group
+      </div>
+    </div>
+
+    <div class="cf pv2 bt" @click="goToAbout">
+      <div class="fl w-20 tc">
+          <ion-icon name="information-circle" style="font-size: 25px;"></ion-icon>
+      </div>
+      <div class="fr w-80 f4">
+        About
+      </div>
+    </div>
+
+     <div class="cf pv2 bt" @click="goToSettings">
+      <div class="fl w-20 tc">
+          <ion-icon name="settings" style="font-size: 25px;"></ion-icon>
+      </div>
+      <div class="fr w-80 f4">
+        Settings
+      </div>
+    </div>
+
   </ion-content>
 </ion-menu>
 
@@ -76,7 +138,7 @@ export default {
       selected: {},
       refreshingTournaments: false,
       filter: filters.ALL,
-      favorites: []
+      favorites: [],
     }
   },
   methods: {
@@ -118,6 +180,9 @@ export default {
     }, // end goToAbout
     openExternalURL(url) {
       open(url, '_blank'); 
+    },
+    goToSettings () {
+
     },
     eventHandlerRefreshTournamentList(msg) {
       console.log("Received Refresh Tournaments EVENT: ", msg)
@@ -166,6 +231,26 @@ export default {
           console.log("Filtering to ALL")
           break;
       } // end switch
+
+      // store in localStorage
+      this.storeTournamentFilter();
+    },
+    async storeTournamentFilter() {
+      console.log("Storing tournament filter: ", this.filter);
+      await Plugins.Storage.set({
+        key: 'filter',
+        value: this.filter.toString()
+      });
+    },
+    async getTournamentFilter() {
+      console.log("Loading filter from store");
+      const f = await Plugins.Storage.get({ key: 'filter' });
+      let s = Object.values(f); 
+      if(s.length > 0) {
+        this.filter = s[0]
+      }
+      
+      console.log("filter: ", this.filter)
     },
     fetchTournaments() {
       console.log("fetching touraments")
@@ -193,11 +278,25 @@ export default {
     messageBus.$on('refreshTournamentList', this.eventHandlerRefreshTournamentList);
     messageBus.$on('redisplayTournamentList', this.eventHandlerRedisplayTournamentList);
     
+    this.getTournamentFilter();
     this.fetchTournaments();
   },
 	components: {
     App
-	}
+  },
+  computed: {
+    ustaSearchSite () {
+      let today = new Date();
+      let month = today.getMonth() + 1;  // month returns as zero based indexing, we need January to start at 1, not zero
+      let year = today.getFullYear();
+      console.log("Date, Month and year: ", today, month, year)
+      let urlStart = 'https://m.tennislink.usta.com/TournamentSearch/searchresults.aspx?typeofsubmit=&action=2&keywords=&tournamentid=&sectiondistrict=8096&city=&state=TX&zip=&month=';
+      let urlMiddle = '&startdate=&enddate=&day=&year=';
+      let urlEnd = '&division=D5115&category=&surface=&onlineentry=&drawssheets=&usertime=&sanctioned=-1&agegroup=A&searchradius=-1';
+      let url = urlStart + month + urlMiddle + year + urlEnd;
+      return url;
+    }
+  } // end computed
 }
 
     // function onBackKeyDown(e) { 

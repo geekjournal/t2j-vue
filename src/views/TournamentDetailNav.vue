@@ -17,19 +17,20 @@
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
-<ion-content padding>
+<ion-content padding class="verticalCenterContainer">
 
   <!-- <ion-button @click="goBackHome()" full>Go Back!</ion-button> -->
 
-  
-  <div v-for="item in this.$parent.selected.mainContent" :key="item">
-    
-      <button @click="selectionMade(item)">
-        <ion-label>
-          <strong>{{ item }}</strong>
-        </ion-label>
-      </button>
-    
+  <div class="verticalCenterContent w-100">
+    <div>
+      <center v-for="item in this.$parent.selected.mainContent" :key="item" class="pr2 mv3">
+          <button @click="selectionMade(item)" class="br3 center w-75">
+            <ion-label class="mv3">
+              <strong>{{ item }}</strong>
+            </ion-label>
+          </button>
+      </center>
+    </div>
   </div>
   
 
@@ -38,6 +39,8 @@
 </template>
 
 <script>
+import { Plugins } from '@capacitor/core';
+
 export default {
   name: 'TournamentDetaillNav',
   data () {
@@ -62,6 +65,14 @@ export default {
           console.log("url to route to: ", url + '#&&s=1')
           open(url + '#&&s=1', '_blank');
           break;
+        case 'Players':
+          console.log("url to route to: ", url + '#&&s=2')
+          open(url + '#&&s=2', '_blank');
+          break;
+        case 'Alternates':
+          console.log("url to route to: ", url + '#&&s=3')
+          open(url + '#&&s=3', '_blank');
+          break;
         case 'Competitors':
           console.log("url to route to: ", url + '#&&s=5')
           open(url + '#&&s=5', '_blank');
@@ -80,10 +91,18 @@ export default {
           open(url + '#&&s=8Results0', '_blank');
           break;
         default: 
+          this.showDialogAlert("No implementation defined")
           break;
       } // end switch
 
-    } // end selectionMade
+    }, // end selectionMade
+     async showDialogAlert(msg){
+      console.log("Enter showDialog");
+      await Plugins.Modals.alert({
+          title: 'Alert',
+          message: msg
+      });
+    }, // showDialogAlert
   },  // end methods
   created: function() {
     console.log("Creating NAV for t.ID=", this.$route.params.id, this.$parent.selected.ID, this.$parent.tournaments.length);
@@ -91,3 +110,14 @@ export default {
   } // end created
 }
 </script>
+
+<style>
+  .verticalCenterContainer {
+    height: 10em;
+    position: relative }              /* 1 */
+  .verticalCenterContent {
+    margin: 0;
+    position: absolute;               /* 2 */
+    top: 50%;                         /* 3 */
+    transform: translate(0, -50%) }   /* 4 */
+</style>
