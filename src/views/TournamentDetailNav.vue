@@ -24,7 +24,7 @@
   <div class="verticalCenterContent w-100">
     <div>
       <center v-for="item in this.$parent.selected.mainContent" :key="item" class="pr2 mv3">
-          <button @click="selectionMade(item)" class="br3 center w-75">
+          <button @click="selectionMade(item)" class="br3 center w-90">
             <ion-label class="mv3">
               <strong>{{ item }}</strong>
             </ion-label>

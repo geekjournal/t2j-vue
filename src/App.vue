@@ -77,7 +77,7 @@
       </div>
     </div>
 
-     <div class="cf pv2 bt" @click="goToSettings">
+    <div class="cf pv2 bt" @click="goToSettings">
       <div class="fl w-20 tc">
           <ion-icon name="settings" style="font-size: 25px;"></ion-icon>
       </div>
@@ -85,6 +85,16 @@
         Settings
       </div>
     </div>
+
+<!-- Only works on Android, not ios -->
+    <!-- <div class="cf pv2 bt" @click="exitApp()">
+      <div class="fl w-20 tc">
+          <ion-icon name="power" style="font-size: 25px;"></ion-icon>
+      </div>
+      <div class="fr w-80 f4">
+        Exit App
+      </div>
+    </div> -->
 
   </ion-content>
 </ion-menu>
@@ -142,6 +152,9 @@ export default {
     }
   },
   methods: {
+    exitApp() {
+      Plugins.App.exitApp();
+    },
     openMainMenu() {
       console.log("openMainMenu called")
       document.querySelector('ion-menu-controller').open('start')

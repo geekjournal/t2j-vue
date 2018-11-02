@@ -1,3 +1,9 @@
+// Require the polyfill before requiring any other modules.
+//require('intersection-observer');
+// For some reason we have to install this polyfill (old browser support)
+// to make things work on ios
+import IntersectionObserver from 'intersection-observer';
+IntersectionObserver.POLL_INTERVAL = 100; // Time in milliseconds.
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
@@ -19,6 +25,7 @@ const { SplashScreen } = Plugins;
 if(platform() != "browser") {
   SplashScreen.hide();
 }
+
 
 export const filters = {
   ALL: 'all',

@@ -118,8 +118,9 @@
     placeholder="Filter tournaments">
   </ion-searchbar> -->
   
-
-<ion-content padding v-touch:swipe="swipeDown">
+<!-- native scrolling, add overflow-scroll=”false” -->
+<!-- <ion-content padding v-touch:swipe="swipeDown" overflow-scroll="false"> -->
+<ion-content padding>
   <ion-refresher @ionRefresh="doRefresh($event)" @ionPull="pullingRefresh($event)">
     <!-- <ion-refresher-content 
       pullingIcon="arrow-dropdown" 
@@ -395,6 +396,7 @@ export default {
 </script>
 
 <style>
+
 
   /* The Modal (background) */
   .popover {
