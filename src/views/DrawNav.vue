@@ -36,7 +36,7 @@
   <div>
     <center v-for="(item, index) in drawCategories" :key="item" class="pr2 mv3">
       <button @click="selectionMade(item, index)" class="br3 center w-90">
-        <ion-label class="mv3">
+        <ion-label class="mv3 text-wrap" style="white-space: normal;">
           <!-- <strong>{{ item }}, {{ index }}</strong> -->
           <strong>{{ item }}</strong>
         </ion-label>
@@ -125,7 +125,11 @@ export default {
     },
     selectionMade(item, index) {
       console.log("picked item: ", item, index)
-      let url = this.$parent.selected.url + '#&&s=7' + 'Draws' + (index +2);
+      // find in parent
+      let parentIndex = this.$parent.selected.drawCategories.indexOf(item);
+      console.log("parent item index: ", parentIndex );
+
+      let url = this.$parent.selected.url + '#&&s=7' + 'Draws' + (parentIndex +2);
       console.log("launching draw URL: ", url)
       open(url, '_blank');      
     } // end selectionMade

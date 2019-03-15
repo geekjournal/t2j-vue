@@ -17,15 +17,17 @@
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
-<ion-content padding class="verticalCenterContainer">
+<!-- <ion-content padding class="verticalCenterContainer"> -->
+<ion-content padding>
 
   <!-- <ion-button @click="goBackHome()" full>Go Back!</ion-button> -->
 
-  <div class="verticalCenterContent w-100">
+  <!-- <div class="verticalCenterContent w-100"> -->
+  <div class="w-100">
     <div>
       <center v-for="item in this.$parent.selected.mainContent" :key="item" class="pr2 mv3">
           <button @click="selectionMade(item)" class="br3 center w-90">
-            <ion-label class="mv3">
+            <ion-label class="mv3" style="white-space: normal;">
               <strong>{{ item }}</strong>
             </ion-label>
           </button>

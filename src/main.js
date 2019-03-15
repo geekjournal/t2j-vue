@@ -48,7 +48,7 @@ Vue.use(VueObserveVisibility)
 // Create a global message bus for passing messages between peer components and views
 export const messageBus = new Vue();
 
-new Vue({
+export const vm = new Vue({
   router,
   render: h => h(App)
 }).$mount('#app')

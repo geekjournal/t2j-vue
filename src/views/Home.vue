@@ -296,8 +296,10 @@ export default {
     async getFavoritesFromStore() {
       console.log("Loading favorites from store");
       const favs = await Plugins.Storage.get({ key: 'favorites' });
+    
       let s = Object.values(favs); 
-      if(s.length > 0) {
+
+      if(s.length > 0 && s[0] != null) {
         this.$parent.favorites = s[0].split(",");
       }
       console.log("favorites: ", this.$parent.favorites)

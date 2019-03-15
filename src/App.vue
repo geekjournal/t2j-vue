@@ -46,9 +46,20 @@
           <ion-icon name="square-outline" style="font-size: 25px;"></ion-icon>
       </div>
       <div class="fr w-80 f4">
-        USTA Search
+        USTA Tournaments
       </div>
     </div>
+
+    <div class="cf pv2" @click="openExternalURL('https://www.usta.com/en/home/about-usta/who-we-are/national/officiating-rules-and-regulations.html')">
+      <div class="fl w-20 tc">
+          <ion-icon name="md-document" style="font-size: 25px;"></ion-icon>
+      </div>
+      <div class="fr w-80 f4">
+        Rules of Tennis
+      </div>
+    </div>
+
+    
 
     <div class="cf pv2 bt" @click="removeFavoritesFromStore">
       <div class="fl w-20 tc">
@@ -132,6 +143,7 @@ import { Plugins } from '@capacitor/core';
 import { ActionSheetOptionStyle } from '@capacitor/core';
 import { messageBus } from '@/main'
 import { filters } from '@/main'
+//import { vm } from '@/main'
 
 // See docs
 // https://capacitor.ionicframework.com/docs/apis/browser
@@ -166,6 +178,12 @@ export default {
     async removeFavoritesFromStore() {
       // TODO: add an are you sure?
       await Plugins.Storage.remove({ key: 'favorites' });
+      this.favorites = [];
+      //vm.$set(this.tournaments, this.tournaments)
+      // :key="someVariableUnderYourControl"
+
+      //this.redisplayTournaments();
+      this.closeMainMenu();
     },
     async openActionSheet() {
       console.log("openActionSheet called");
@@ -193,6 +211,7 @@ export default {
     }, // end goToAbout
     openExternalURL(url) {
       open(url, '_blank'); 
+      this.closeMainMenu();
     },
     goToSettings () {
 
