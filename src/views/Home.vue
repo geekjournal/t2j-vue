@@ -8,7 +8,7 @@
     <ion-title  v-show="!search">
      The Traveling Circus
     </ion-title>
-    
+
     <ion-buttons slot="start" v-show="search">
       <ion-button @click="hideSearchBar(null)" bg-white>
         <ion-icon name="arrow-back" style="font-size: 25px;"></ion-icon>
@@ -29,42 +29,42 @@
       </ion-button>
     </ion-buttons>
 
-    <ion-searchbar id="searchBar" v-show="search" 
-      v-model="searchText" 
-      @ionInput="keyUpSearchText" 
+    <ion-searchbar id="searchBar" v-show="search"
+      v-model="searchText"
+      @ionInput="keyUpSearchText"
       @ionBlur="hideSearchBar($event)"
-      placeholder="Filter tournaments" 
+      placeholder="Filter tournaments"
       v-observe-visibility="{ callback: setSearchVisibility, throttle: 300 }"
     >
     </ion-searchbar>
 
   </ion-toolbar>
 
-  <!-- <ion-searchbar id="searchBar" v-show="search" 
-    v-model="searchText" 
-    @ionInput="keyUpSearchText" 
+  <!-- <ion-searchbar id="searchBar" v-show="search"
+    v-model="searchText"
+    @ionInput="keyUpSearchText"
     @ionBlur="hideSearchBar"
-    placeholder="Filter tournaments" 
+    placeholder="Filter tournaments"
     v-observe-visibility="{ callback: setSearchVisibility, throttle: 300 }"
   >
   </ion-searchbar> -->
 
-   
+
 
   <!-- Sub HEADER -->
   <div>
     <!-- <ion-button @click="this.$parent.openActionSheet" clear>
       <span style="float: middle;"><ion-icon large ios="ios-funnel" md="md-funnel" style="font-size: 25px;"></ion-icon></span>
     </ion-button> -->
-    
+
     <!-- <span style="float: left;"> <ion-icon name="md-search" @click="search = !search" style="font-size: 25px;"></ion-icon>  </span> -->
-    
+
     <!-- <span style="float: right;"> <ion-icon name="md-refresh" style="font-size: 25px;"></ion-icon>  </span> -->
-    
+
     <!-- <ion-button @click="this.$parent.refresh" clear>
         <ion-icon name="md-refresh" style="font-size: 25px;"></ion-icon>
     </ion-button> -->
-    
+
     <span class="f7 fl ml mh3 mv1 dark-blue">
       Showing: {{ this.$parent.filteredTournaments.length }} of {{ this.$parent.tournaments.length }}
     </span>
@@ -90,7 +90,7 @@
         <button id="popOverCloseButton" ion-item @click="closePopOver($event)">Close Popover</button>
         <button ion-item>Documentation</button>
       </ion-list> -->
-      
+
       <!-- <span id="secondPopOverCloseButton" class="close" @click="closePopOver($event)">&times;</span> -->
       <!-- <ion-button class="popover-button w-100" block outline>Outline + Block</ion-button> -->
       <ion-title class="mb2">Select Filter</ion-title>
@@ -103,7 +103,7 @@
       <!-- <a class="f6 link dim ph3 pv2 mb2 dib black bg-white w-100 br3" href="#0">Button Text</a> -->
       <!-- <div class="w-100 bb mv2"></div> -->
       <ion-button class="popover-button" @click="closePopOver($event)">Cancel</ion-button>
-      
+
       </center>
     </div>
   </div>
@@ -111,31 +111,31 @@
 <!-- END Main HEADER -->
 </ion-header>
 
-  <!-- <ion-searchbar v-if="search" 
-    v-model="searchText" 
-    @ionInput="keyUpSearchText" 
+  <!-- <ion-searchbar v-if="search"
+    v-model="searchText"
+    @ionInput="keyUpSearchText"
     @ionBlur="search = false"
     placeholder="Filter tournaments">
   </ion-searchbar> -->
-  
+
 <!-- native scrolling, add overflow-scroll=”false” -->
 <!-- <ion-content padding v-touch:swipe="swipeDown" overflow-scroll="false"> -->
 <ion-content padding>
   <ion-refresher @ionRefresh="doRefresh($event)" @ionPull="pullingRefresh($event)">
-    <!-- <ion-refresher-content 
-      pullingIcon="arrow-dropdown" 
-      pullingText="Pull to refresh" 
-      refreshingSpinner="circles" 
+    <!-- <ion-refresher-content
+      pullingIcon="arrow-dropdown"
+      pullingText="Pull to refresh"
+      refreshingSpinner="circles"
       refreshingText="Refreshing...">
     </ion-refresher-content> -->
-    
+
    <div id="puller">pull down to refresh</div>
   </ion-refresher>
 
   <!-- <div v-if="this.$parent.refreshingTournaments"><center>Refreshing Tournaments List</center></div> -->
   <div style="display: none;" id="home-content"><center>Refreshing Tournaments List</center></div>
   <!-- <p>If you get lost, the <a href="https://ionicframework.com/docs">docs</a> will be your guide.</p> -->
-  
+
   <!-- <ion-button @click="showDialogAlert" full>Show Alert Box</ion-button>
   <ion-button v-on:click="showDialogAlert" full>Show Alert Box</ion-button> -->
 
@@ -145,7 +145,7 @@
       <ion-item>Argentina</ion-item>
     <ion-item-divider color="light">A</ion-item-divider>
       <ion-item>Angola</ion-item>
-  
+
    <ion-item>
      {{ t.name }}
    </ion-item>
@@ -155,9 +155,9 @@
      {{ t.name }}
    </div>
    -->
-   
+
   <ion-list v-if="tournaments.length > -1">
-    <!-- <ion-item-group> -->   
+    <!-- <ion-item-group> -->
       <!-- <ion-item-divider color="light">
         <span class="f7 b fl ml mh3">
           Showing: {{ this.$parent.filteredTournaments.length }} of {{ this.$parent.tournaments.length }}
@@ -166,29 +166,32 @@
           Filter: {{ this.$parent.filter }}
         </span>
       </ion-item-divider> -->
-        
+
         <!-- <ion-item v-for="t in this.$parent.filteredTournaments" :key="t.ID"> -->
           <!-- <ion-card v-touch:swipe="swipeDown"> -->
           <ion-card class="cf" v-for="t in this.$parent.filteredTournaments" :key="t.ID">
-            
+
             <div class="fl w-90 bg-white mv1 pl2 pv2" @click="tournamentClicked(t)">
-              <span class="f6 b dark-gray mw-80">{{ t.name }}</span>
+              <span class="f5 b dark-gray mw-80">{{ t.name }}</span>
               <br />
-              <span class="mid-gray">{{ t.date }} - {{ t.city }}</span>
+              <span class="f5 mid-gray">{{ t.date }} - {{ t.city }}</span>
+              <br />
+              <!-- <span class="mid-gray">{{ getDeadline(t) }}</span> -->
+              <span class="mid-gray"><span v-html="getDeadline(t)" /> </span>
             </div>
             <div class="fr w-10 bg-white tc mv1 pv1">
               <ion-icon v-if="!isFavorite(t.ID)" @click="addFavorite(t.ID)" name="star-outline" class="yellow" style="font-size: 25px;"></ion-icon>
-              <ion-icon v-if="isFavorite(t.ID)" @click="removeFavorite(t.ID)" name="star" class="yellow" style="font-size: 25px;"></ion-icon> 
+              <ion-icon v-if="isFavorite(t.ID)" @click="removeFavorite(t.ID)" name="star" class="yellow" style="font-size: 25px;"></ion-icon>
               <br /> <span class="dark-blue">{{t.points}}</span>
             </div>
-            
+
             <!-- <span class="f5 b mw-80">{{ t.name }}</span>
             <button class="f3" ion-label @click="tournamentClicked(t)">Details</button> -->
           </ion-card>
         <!-- </ion-item>  -->
     <!-- </ion-item-group> -->
   </ion-list>
-  
+
 
 </ion-content>
 </ion-app>
@@ -222,7 +225,7 @@ export default {
         console.log("search is true, hiding anyway")
         document.getElementById("searchBar").style.display = "none";
       }
-      this.searchText = ''; // reset search text, not working? 
+      this.searchText = ''; // reset search text, not working?
       if(e) {   // guess we have to do this instead
         e.target.value = '';
       }
@@ -231,7 +234,7 @@ export default {
     },
     setSearchVisibility(visible) {
       console.log("setSearchVisibility called with (call, search): ", visible, this.search)
-      
+
       if(visible) {
         // set focus, and pop up keyboard
         // Must set timeout so DOM renders before we set focus
@@ -246,7 +249,7 @@ export default {
           this.search = false;
         }
       }
-      
+
     },
     pullingRefresh() {
       document.querySelector('#puller').innerHTML = '<center>continue pulling to refresh</center>'
@@ -262,7 +265,7 @@ export default {
       //   console.log('Async operation has ended');
       //   refresher.target.complete();
       // }, 2000);
-      
+
     },
     addFavorite(ID) {
       let i = this.$parent.favorites.indexOf(ID);
@@ -296,8 +299,8 @@ export default {
     async getFavoritesFromStore() {
       console.log("Loading favorites from store");
       const favs = await Plugins.Storage.get({ key: 'favorites' });
-    
-      let s = Object.values(favs); 
+
+      let s = Object.values(favs);
 
       if(s.length > 0 && s[0] != null) {
         this.$parent.favorites = s[0].split(",");
@@ -322,9 +325,9 @@ export default {
         this.$parent.filteredTournaments = this.$parent.filteredTournaments.filter((item) => {
           return (
             item.name.toLowerCase().indexOf(val.toLowerCase()) > -1 ||
-            item.points.toLowerCase().indexOf(val.toLowerCase()) > -1 || 
-            item.city.toLowerCase().indexOf(val.toLowerCase()) > -1 || 
-            item.date.toLowerCase().indexOf(val.toLowerCase()) > -1 || 
+            item.points.toLowerCase().indexOf(val.toLowerCase()) > -1 ||
+            item.city.toLowerCase().indexOf(val.toLowerCase()) > -1 ||
+            item.date.toLowerCase().indexOf(val.toLowerCase()) > -1 ||
             item.ID.toLowerCase().indexOf(val.toLowerCase()) > -1
           ); // end return statement
         })
@@ -336,7 +339,7 @@ export default {
     },
     closePopOver($event) {
       console.log("closePopOver called", $event.srcElement.id)
-      document.querySelector('#mainPopOver').style.display = 'none'; 
+      document.querySelector('#mainPopOver').style.display = 'none';
     },
     goToAbout () {
       this.$router.push('about')
@@ -346,7 +349,7 @@ export default {
       document.querySelector('ion-menu-controller').open('start')
     },
     openExternalURL(url) {
-      open(url, '_blank'); 
+      open(url, '_blank');
     },
     tournamentClicked(t) {
       console.log("Tournament clicked: ", t.name, t.ID)
@@ -374,7 +377,7 @@ export default {
         }, (response) => {
           console.log("failed to get tournaments", response.body)
         });
-    },  // end fetchTournaments    
+    },  // end fetchTournaments
     swipeDown(swipeDirection) {
       console.log("Swipe down called:", swipeDirection)
       // this.$parent.refreshingTournaments = true;
@@ -383,18 +386,49 @@ export default {
 
       // must need to send an event to refresh list
       // messageBus.$emit('refreshTournamentList', 'refresh');
+    },
+    getDeadline(t) {
+
+      let today = new Date();
+      let deadDate = new Date(t.deadline);
+
+      if(t.deadline) {
+        let diffDays = Math.abs(today.getTime() - deadDate.getTime());
+        diffDays = diffDays / (1000 * 60 * 60 * 24);
+
+        if(deadDate < today || diffDays > 10) {
+          // return "deadline: " + t.deadline ;
+          return "<span class='f7'>" + "enter by: " + t.deadline + "</span>";
+        } else {
+          return "<span class='red'>" + "enter by: " + t.deadline + "</span>";
+        }
+      }
+
+      //return "entries open: " + t.entriesOpen;
+      return "";
+
+
+      // let today = new Date();
+      // let month = today.getMonth();
+      // let year = today.getFullYear();
+      // console.log("Date, Month and year: ", today, month, year)
+
+      // return "hello";
     }
   }, // end methods:
   created: function() {
     this.getFavoritesFromStore();
   }, // end created:
   updated: function() {
-    
+
   },
   components: {
 
-  }
-}    
+  },
+  computed: {
+
+  } // end computed
+}
 </script>
 
 <style>

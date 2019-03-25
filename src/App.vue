@@ -14,15 +14,15 @@
     </ion-toolbar>
   </ion-header>
   <ion-content padding>
-    <!-- <button ion-button> 
+    <!-- <button ion-button>
       <ion-label>START MENU CONTENTS</ion-label>
     </button> -->
     <!-- <ion-button shape="round" @click="goToAbout" full>About</ion-button>
     <ion-button shape="round" @click="openExternalURL('https://tennislink.usta.com/tournaments/rankings/rankinghome.aspx')" full>Ranking/Record Search</ion-button>
-    <ion-button shape="round" @click="openExternalURL('https://tennislink.usta.com/leagues/reports/NTRP/FindRating.aspx')" full>Rating Search</ion-button> 
-    <ion-button shape="round" @click="openExternalURL('https://www.facebook.com/groups/379071872251830/')" full>Facebook Group</ion-button> 
+    <ion-button shape="round" @click="openExternalURL('https://tennislink.usta.com/leagues/reports/NTRP/FindRating.aspx')" full>Rating Search</ion-button>
+    <ion-button shape="round" @click="openExternalURL('https://www.facebook.com/groups/379071872251830/')" full>Facebook Group</ion-button>
     <ion-button shape="round" @click="removeFavoritesFromStore" full>Clear Favorites</ion-button>  -->
-    
+
     <div class="cf pv2" @click="openExternalURL('https://tennislink.usta.com/tournaments/rankings/rankinghome.aspx')">
       <div class="fl w-20 tc">
           <ion-icon name="tennisball" style="font-size: 25px;"></ion-icon>
@@ -59,7 +59,7 @@
       </div>
     </div>
 
-    
+
 
     <div class="cf pv2 bt" @click="removeFavoritesFromStore">
       <div class="fl w-20 tc">
@@ -117,7 +117,7 @@
 
 <ion-page class="show-page" main>
 </ion-page>
-<ion-menu-controller></ion-menu-controller> 
+<ion-menu-controller></ion-menu-controller>
 
 
 
@@ -143,6 +143,7 @@ import { Plugins } from '@capacitor/core';
 import { ActionSheetOptionStyle } from '@capacitor/core';
 import { messageBus } from '@/main'
 import { filters } from '@/main'
+import SettingsStore from '@/stores/settingsStore';
 //import { vm } from '@/main'
 
 // See docs
@@ -155,6 +156,7 @@ export default {
     return {
       apiURLbase: 'https://api.geekjournal.com',
       //apiURLbase: 'http://localhost:8080',
+      sharedItems: SettingsStore.data,
       tournaments: [],
       filteredTournaments: [],
       selected: {},
@@ -210,7 +212,7 @@ export default {
       this.$router.push('about');
     }, // end goToAbout
     openExternalURL(url) {
-      open(url, '_blank'); 
+      open(url, '_blank');
       this.closeMainMenu();
     },
     goToSettings () {
@@ -255,7 +257,7 @@ export default {
           console.log("Filtered tments: ", this.filteredTournaments);
           break;
         case filters.FAVORITES:
-          this.filteredTournaments = this.tournaments.filter( t => this.favorites.indexOf(t.ID) > -1 ? true : false ); 
+          this.filteredTournaments = this.tournaments.filter( t => this.favorites.indexOf(t.ID) > -1 ? true : false );
           break;
         case filters.ALL:
         default:
@@ -268,6 +270,9 @@ export default {
       this.storeTournamentFilter();
     },
     async storeTournamentFilter() {
+      if(!this.filter) {
+        return;
+      }
       console.log("Storing tournament filter: ", this.filter);
       await Plugins.Storage.set({
         key: 'filter',
@@ -277,11 +282,11 @@ export default {
     async getTournamentFilter() {
       console.log("Loading filter from store");
       const f = await Plugins.Storage.get({ key: 'filter' });
-      let s = Object.values(f); 
+      let s = Object.values(f);
       if(s.length > 0) {
         this.filter = s[0]
       }
-      
+
       console.log("filter: ", this.filter)
     },
     fetchTournaments() {
@@ -305,11 +310,11 @@ export default {
     } // end goBack()
   },
   created: function() {
-    document.addEventListener("backbutton", this.goBack, false);  
-    
+    document.addEventListener("backbutton", this.goBack, false);
+
     messageBus.$on('refreshTournamentList', this.eventHandlerRefreshTournamentList);
     messageBus.$on('redisplayTournamentList', this.eventHandlerRedisplayTournamentList);
-    
+
     this.getTournamentFilter();
     this.fetchTournaments();
   },
@@ -331,9 +336,9 @@ export default {
   } // end computed
 }
 
-    // function onBackKeyDown(e) { 
-    //   e.preventDefault(); 
-    //   // alert('Back Button is Pressed!'); 
+    // function onBackKeyDown(e) {
+    //   e.preventDefault();
+    //   // alert('Back Button is Pressed!');
     //   App.goBack(); // go back one screen
     // }
 
