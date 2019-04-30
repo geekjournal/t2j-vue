@@ -73,7 +73,7 @@
     </span>
 
     <!-- Default Segment -->
-    <ion-segment @ionChange="segmentChanged($event)" value="upcoming" color="medium">
+    <ion-segment @ionChange="segmentChanged($event)" :value="this.$parent.display" color="medium">
       <ion-segment-button value="all">
         <ion-label>All</ion-label>
       </ion-segment-button>
@@ -190,7 +190,7 @@
             <div class="fl w-90 bg-white mv1 pl2 pv2" @click="tournamentClicked(t)">
               <span class="f5 b dark-gray mw-80">{{ t.name }}</span>
               <br />
-              <span class="f5 mid-gray">{{ t.date }} - {{ t.city }}</span>
+              <span class="f5 mid-gray">{{ t.date }} - {{ t.location }}</span>
               <br />
               <!-- <span class="mid-gray">{{ getDeadline(t) }}</span> -->
               <span class="mid-gray"><span v-html="getDeadline(t)" /> </span>
@@ -413,17 +413,17 @@ export default {
     getDeadline(t) {
 
       let today = new Date();
-      let deadDate = new Date(t.deadline);
+      let deadDate = new Date(t.entries_close);
 
-      if(t.deadline) {
+      if(t.entries_close) {
         let diffDays = Math.abs(today.getTime() - deadDate.getTime());
         diffDays = diffDays / (1000 * 60 * 60 * 24);
 
         if(deadDate < today || diffDays > 10) {
           // return "deadline: " + t.deadline ;
-          return "<span class='f7'>" + "enter by: " + t.deadline + "</span>";
+          return "<span class='f7'>" + "enter by: " + t.entries_close + "</span>";
         } else {
-          return "<span class='red'>" + "enter by: " + t.deadline + "</span>";
+          return "<span class='red'>" + "enter by: " + t.entries_close + "</span>";
         }
       }
 
