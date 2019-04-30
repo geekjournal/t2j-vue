@@ -13,6 +13,7 @@
       <!-- <ion-icon name="close" @click="closeMainMenu" style="font-size: 25px;"></ion-icon> -->
     </ion-toolbar>
   </ion-header>
+
   <ion-content padding>
     <!-- <button ion-button>
       <ion-label>START MENU CONTENTS</ion-label>
@@ -143,6 +144,7 @@ import { Plugins } from '@capacitor/core';
 import { ActionSheetOptionStyle } from '@capacitor/core';
 import { messageBus } from '@/main'
 import { filters } from '@/main'
+import { displays } from '@/main'
 import SettingsStore from '@/stores/settingsStore';
 //import { vm } from '@/main'
 
@@ -162,10 +164,14 @@ export default {
       selected: {},
       refreshingTournaments: false,
       filter: filters.ALL,
+      display: displays.UPCOMING,
       favorites: [],
     }
   },
   methods: {
+    segmentChanged(ev) {
+      console.log('Segment changed', ev);
+    },
     exitApp() {
       Plugins.App.exitApp();
     },
@@ -230,6 +236,7 @@ export default {
       this.redisplayTournaments();
     },
     redisplayTournaments() {
+
       switch(this.filter) {
         case filters.SIX_HUNDRED:
           console.log("Filtering to 600")
@@ -266,8 +273,47 @@ export default {
           break;
       } // end switch
 
+      switch(this.display) {
+        case displays.UPCOMING:
+          console.log("Display set to show upcoming")
+          this.filteredTournaments = this.filteredTournaments.filter(
+            t => {
+              let date = new Date(t.deadline);
+              let now = new Date();
+
+              let diffDays = Math.abs(now.getTime() - date.getTime());
+              diffDays = diffDays / (1000 * 60 * 60 * 24);
+              if( date > now || diffDays < 20 ) {
+                return true;
+              }
+              return false;
+            });
+          break;
+        case displays.PAST:
+          console.log("Display set to show past")
+          this.filteredTournaments = this.filteredTournaments.filter(
+            t => {
+              let date = new Date(t.deadline);
+              let now = new Date();
+
+              let diffDays = Math.abs(now.getTime() - date.getTime());
+              diffDays = diffDays / (1000 * 60 * 60 * 24);
+              if( date < now && diffDays > 20 ) {
+                return true;
+              }
+              return false;
+            });
+          break;
+        case displays.ALL:
+        default:
+          console.log("Display set to show all")
+          this.filteredTournaments = this.filteredTournaments;
+          break;
+      }
+
       // store in localStorage
       this.storeTournamentFilter();
+      this.storeTournamentDisplay();
     },
     async storeTournamentFilter() {
       if(!this.filter) {
@@ -279,12 +325,32 @@ export default {
         value: this.filter.toString()
       });
     },
+    async storeTournamentDisplay() {
+      if(!this.display) {
+        return;
+      }
+      console.log("Storing tournament display: ", this.display);
+      await Plugins.Storage.set({
+        key: 'display',
+        value: this.display.toString()
+      });
+    },
     async getTournamentFilter() {
       console.log("Loading filter from store");
       const f = await Plugins.Storage.get({ key: 'filter' });
       let s = Object.values(f);
       if(s.length > 0) {
         this.filter = s[0]
+      }
+
+      console.log("filter: ", this.filter)
+    },
+    async getTournamentDisplay() {
+      console.log("Loading display from store");
+      const f = await Plugins.Storage.get({ key: 'display' });
+      let s = Object.values(f);
+      if(s.length > 0) {
+        this.display = s[0]
       }
 
       console.log("filter: ", this.filter)
@@ -316,6 +382,7 @@ export default {
     messageBus.$on('redisplayTournamentList', this.eventHandlerRedisplayTournamentList);
 
     this.getTournamentFilter();
+    this.getTournamentDisplay();
     this.fetchTournaments();
   },
 	components: {

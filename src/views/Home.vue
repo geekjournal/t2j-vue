@@ -72,12 +72,26 @@
       Filter: {{ this.$parent.filter }}
     </span>
 
+    <!-- Default Segment -->
+    <ion-segment @ionChange="segmentChanged($event)" value="upcoming" color="medium">
+      <ion-segment-button value="all">
+        <ion-label>All</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="upcoming">
+        <ion-label>Upcoming</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="past">
+        <ion-label>Past</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+
     <!-- <button ion-button block @click="this.$parent.openActionSheet">
       show action sheet
     </button>
     <ion-button @click="openPopOver">
         Open Popover
     </ion-button> -->
+
   </div>
 
 
@@ -156,7 +170,9 @@
    </div>
    -->
 
-  <ion-list v-if="tournaments.length > -1">
+
+
+  <ion-list v-if="this.$parent.filteredTournaments.length > -1">
     <!-- <ion-item-group> -->
       <!-- <ion-item-divider color="light">
         <span class="f7 b fl ml mh3">
@@ -202,6 +218,7 @@
 import { Plugins } from '@capacitor/core';
 import { messageBus } from '@/main'
 import { filters } from '@/main'
+// import { displays } from '@/main'
 
 export default {
   name: 'Home',
@@ -216,6 +233,12 @@ export default {
     }
   }, // end data
   methods: {
+    segmentChanged(ev) {
+      console.log('Segment changed', ev);
+      this.$parent.display = ev.target.value;
+      //this.hideSearchBar(); // will also call redisplay tournaments
+      this.$parent.redisplayTournaments(); // redisplay tournaments
+    },
     hideSearchBar(e) {
       console.log("hide search bar called")
       if(!this.search) {

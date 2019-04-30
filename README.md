@@ -10,6 +10,9 @@ npm install
 npm run serve
 ```
 
+To run from the src directory instead of root git directory, and to run on a different port:
+`npm run --prefix ../ serve -- --port 8889`
+
 ### Compiles and minifies for production
 ```
 npm run build

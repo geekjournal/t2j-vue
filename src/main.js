@@ -35,7 +35,13 @@ export const filters = {
   ONE_HUNDRED: '100 points',
   OTHER: 'other',
   CUSTOM: 'custom',
-  FAVORITES: 'favorites'
+  FAVORITES: 'favorites',
+}
+
+export const displays = {
+  ALL: 'all',
+  UPCOMING: 'upcoming',
+  PAST: 'past'
 }
 
 Vue.config.ignoredElements = [/^ion-/]
