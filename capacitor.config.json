@@ -2,5 +2,12 @@
   "appId": "com.geekjournal.mobile",
   "appName": "Traveling Circus",
   "bundledWebRuntime": false,
-  "webDir": "dist"
+  "webDir": "dist",
+
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 2000,
+      "androidSplashResourceName": "splash"
+    }
+  }
 }

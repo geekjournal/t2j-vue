@@ -278,12 +278,12 @@ export default {
           console.log("Display set to show upcoming")
           this.filteredTournaments = this.filteredTournaments.filter(
             t => {
-              let date = new Date(t.deadline);
+              let date = new Date(t.date);
               let now = new Date();
 
               let diffDays = Math.abs(now.getTime() - date.getTime());
               diffDays = diffDays / (1000 * 60 * 60 * 24);
-              if( date > now || diffDays < 20 ) {
+              if( date >= now || diffDays < 3 ) {
                 return true;
               }
               return false;
@@ -293,16 +293,22 @@ export default {
           console.log("Display set to show past")
           this.filteredTournaments = this.filteredTournaments.filter(
             t => {
-              let date = new Date(t.deadline);
+              let date = new Date(t.date);
               let now = new Date();
 
               let diffDays = Math.abs(now.getTime() - date.getTime());
               diffDays = diffDays / (1000 * 60 * 60 * 24);
-              if( date < now && diffDays > 20 ) {
+              if( date < now && diffDays > 3 ) {
                 return true;
               }
               return false;
             });
+          this.filteredTournaments.sort(
+            function(a,b) {
+              let dateA = new Date(a.date), dateB = new Date(b.date);
+              return dateB - dateA; // sort decending
+            }
+          ); // end sort
           break;
         case displays.ALL:
         default:
@@ -357,7 +363,7 @@ export default {
     },
     fetchTournaments() {
       console.log("fetching touraments")
-      this.$http.get(this.apiURLbase + '/tournaments')
+      this.$http.get(this.apiURLbase + '/tournaments', {params: {"tksode": 5928475}}) // random param so we can kill this client serverside if needed
         .then(function(response) {
           console.log(response.body)
           this.tournaments = response.body;
