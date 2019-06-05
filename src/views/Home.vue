@@ -194,6 +194,8 @@
               <br />
               <!-- <span class="mid-gray">{{ getDeadline(t) }}</span> -->
               <span class="mid-gray"><span v-html="getDeadline(t)" /> </span>
+              <br />
+              <!-- <span class="f7 mid-gray">status: {{t.status}}</span> -->
             </div>
             <div class="fr w-10 bg-white tc mv1 pv1">
               <ion-icon v-if="!isFavorite(t.ID)" @click="addFavorite(t.ID)" name="star-outline" class="yellow" style="font-size: 25px;"></ion-icon>
@@ -240,6 +242,10 @@ export default {
       this.$parent.redisplayTournaments(); // redisplay tournaments
     },
     hideSearchBar(e) {
+      if(e) {
+        e.preventDefault(); // this allows the event to propogate by essentialy saying we didn't handle it
+      }
+
       console.log("hide search bar called")
       if(!this.search) {
         console.log("search already false, doing nothing")
@@ -349,7 +355,7 @@ export default {
           return (
             item.name.toLowerCase().indexOf(val.toLowerCase()) > -1 ||
             item.points.toLowerCase().indexOf(val.toLowerCase()) > -1 ||
-            item.city.toLowerCase().indexOf(val.toLowerCase()) > -1 ||
+            item.location.toLowerCase().indexOf(val.toLowerCase()) > -1 ||
             item.date.toLowerCase().indexOf(val.toLowerCase()) > -1 ||
             item.ID.toLowerCase().indexOf(val.toLowerCase()) > -1
           ); // end return statement

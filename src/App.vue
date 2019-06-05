@@ -156,8 +156,8 @@ export default {
   name: 'App',
   data () {
     return {
-      //apiURLbase: 'https://api.geekjournal.com',
-      apiURLbase: 'http://localhost:8080',
+      apiURLbase: 'https://api.geekjournal.com',
+      //apiURLbase: 'http://localhost:8080',
       sharedItems: SettingsStore.data,
       tournaments: [],
       filteredTournaments: [],
@@ -363,7 +363,7 @@ export default {
     },
     fetchTournaments() {
       console.log("fetching touraments")
-      this.$http.get(this.apiURLbase + '/tournaments')
+      this.$http.get(this.apiURLbase + '/tournaments', {params: {"tksode": 5928475}}) // random param so we can kill this client serverside if needed
         .then(function(response) {
           console.log(response.body)
           this.tournaments = response.body;

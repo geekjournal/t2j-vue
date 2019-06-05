@@ -22,6 +22,7 @@ import './../node_modules/tachyons/css/tachyons.css';
 import { Plugins } from '@capacitor/core';
 import { platform } from 'os';
 const { SplashScreen } = Plugins;
+
 if(platform() != "browser") {
   SplashScreen.hide();
 }
