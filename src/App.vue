@@ -127,6 +127,18 @@
           </div>
         </div> -->
 
+        <div
+          class="cf pv2 bt grow pointer"
+          @click="openExternalURL('mailto:admin@geekjournal.com')"
+        >
+          <div class="fl w-20 tc">
+            <ion-icon name="md-send" style="font-size: 25px;"></ion-icon>
+          </div>
+          <div class="fr w-80 f4">
+            Send Feedback
+          </div>
+        </div>
+
         <!-- Only works on Android, not ios -->
         <!-- <div class="cf pv2 bt" @click="exitApp()">
       <div class="fl w-20 tc">

@@ -13,7 +13,14 @@
       </ion-toolbar>
     </ion-header>
     <ion-content padding>
-      Made with <span class="red">&hearts;</span> by a tennis enthusiast.
+      <div class="mb4 tc">
+        Made with <span class="red">&hearts;</span> by a tennis enthusiast in
+        Austin, TX.
+      </div>
+
+      <div class="tc">
+        <img src="@/assets/me.png" />
+      </div>
       <!-- <ion-button @click="goBackHome()" full>Go Back!</ion-button> -->
     </ion-content>
   </ion-app>
