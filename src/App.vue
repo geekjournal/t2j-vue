@@ -380,6 +380,8 @@ export default {
       let s = Object.values(f);
       if (s.length > 0) {
         this.display = s[0];
+      } else {
+        this.display = displays.UPCOMING;
       }
 
       console.log('filter: ', this.filter);
