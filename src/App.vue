@@ -296,6 +296,7 @@ export default {
         default:
           this.filteredTournaments = this.tournaments;
           console.log('Filtering to ALL');
+          this.filter = filters.ALL;
           break;
       } // end switch
 
@@ -337,6 +338,7 @@ export default {
         default:
           console.log('Display set to show all');
           this.filteredTournaments = this.filteredTournaments;
+          this.display = displays.ALL;
           break;
       }
 
@@ -425,6 +427,7 @@ export default {
     this.getTournamentFilter();
     this.getTournamentDisplay();
     this.fetchTournaments();
+    this.redisplayTournaments();
   },
   components: {
     App,
