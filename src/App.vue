@@ -5,6 +5,40 @@
     <!-- <router-link to="/">Home</router-link> |
     <router-link to="/about">About</router-link> -->
 
+    <!-- Dialog to display license and ask user to accept license before use
+    See main.js for vue-js-modal -->
+    <modal
+      name="dialog"
+      :scrollable="false"
+      height="auto"
+      :max-height="600"
+      :max-width="600"
+      :adaptive="true"
+      :clickToClose="false"
+    >
+      <div style="overflow-y: auto; height: 300px;">
+        <div class="mb2 b pa2">
+          NOTE: YOU MUST READ AND AGREE TO THE TERMS AND PRIVACY POLICY TO
+          CONTINUE. SCROLL DOWN TO READ THE FULL TEXT.
+        </div>
+        <span v-html="licenseText"></span>
+        <div class="pa2 b">
+          By clicking "Accept" below, you are agreeing to abide by and be bound
+          to the provided Terms & Conditions and Privacy Policy. If you do not
+          wish to accept these terms, press "Decline." If you Decline, you are
+          acknowleging that you will not use this website and/or systems
+          affialiated with this site.
+        </div>
+      </div>
+      <div class="ba tc bg-light-gray">
+        <ion-button class="pr2" @click="acceptLicenseTerms">Accept</ion-button>
+        <ion-button color="danger " class="pl2" @click="rejectLicenseTerms"
+          >Decline</ion-button
+        >
+      </div>
+    </modal>
+    <!-- <ion-button @click="openLicenseAcceptanceDialog">Press me</ion-button> -->
+
     <ion-menu side="start">
       <ion-header>
         <ion-toolbar color="secondary">
@@ -118,6 +152,15 @@
           </div>
         </div>
 
+        <div class="cf pv2 grow pointer" @click="goToLicense">
+          <div class="fl w-20 tc">
+            <ion-icon name="md-clipboard" style="font-size: 25px;"></ion-icon>
+          </div>
+          <div class="fr w-80 f4">
+            License
+          </div>
+        </div>
+
         <!-- <div class="cf pv2 bt grow" @click="goToSettings">
           <div class="fl w-20 tc">
             <ion-icon name="settings" style="font-size: 25px;"></ion-icon>
@@ -176,6 +219,7 @@ import { messageBus } from '@/main';
 import { filters } from '@/main';
 import { displays } from '@/main';
 import SettingsStore from '@/stores/settingsStore';
+import LicenseText from 'raw-loader!@/assets/license.txt';
 //import { vm } from '@/main'
 
 // See docs
@@ -195,6 +239,8 @@ export default {
       filter: filters.ALL,
       display: displays.UPCOMING,
       favorites: [],
+      licenseAccepted: false,
+      licenseText: LicenseText,
     };
   },
   methods: {
@@ -222,6 +268,46 @@ export default {
       //this.redisplayTournaments();
       this.closeMainMenu();
     },
+    acceptLicenseTerms() {
+      this.licenseAccepted = true;
+      this.storeLicenseAccepted();
+      this.$modal.hide('dialog');
+    },
+    rejectLicenseTerms() {
+      this.licenseAccepted = false;
+      this.storeLicenseAccepted();
+      this.$modal.hide('dialog');
+      location.replace('https://dev-t2j.netlify.com');
+    },
+    openLicenseAcceptanceDialog() {
+      this.$modal.show('dialog');
+      // this.$modal.show('dialog', {
+      //   title: 'License Agreement',
+      //   text: LicenseText,
+      //   buttons: [
+      //     {
+      //       title: 'I accept',
+      //       handler: () => {
+      //         // alert('Woot!');
+      //         // TODO: set acceptance via this.storeLicenseAccepted()
+      //         this.licenseAccepted = true;
+      //         this.storeLicenseAccepted();
+      //         this.$modal.hide('dialog');
+      //       },
+      //     },
+      //     {
+      //       title: 'Decline', // Button title
+      //       default: true, // Will be triggered by default if 'Enter' pressed.
+      //       handler: () => {
+      //         this.licenseAccepted = false;
+      //         this.storeLicenseAccepted();
+      //         this.$modal.hide('dialog');
+      //         location.replace('https://fortylove.net');
+      //       }, // Button click handler
+      //     },
+      //   ],
+      // });
+    },
     async openActionSheet() {
       console.log('openActionSheet called');
       let promptRet = await Plugins.Modals.showActions({
@@ -246,6 +332,10 @@ export default {
       this.closeMainMenu();
       this.$router.push('about');
     }, // end goToAbout
+    goToLicense() {
+      this.closeMainMenu();
+      this.$router.push('license');
+    },
     openExternalURL(url) {
       open(url, '_blank');
       this.closeMainMenu();
@@ -378,6 +468,16 @@ export default {
         value: this.display.toString(),
       });
     },
+    async storeLicenseAccepted() {
+      console.log(
+        'Storing license acceptance: ',
+        this.licenseAccepted.toString()
+      );
+      await Plugins.Storage.set({
+        key: 'licenseAccepted',
+        value: this.licenseAccepted.toString(),
+      });
+    },
     async getTournamentFilter() {
       console.log('Loading filter from store');
       const f = await Plugins.Storage.get({ key: 'filter' });
@@ -399,6 +499,26 @@ export default {
       }
 
       console.log('filter: ', this.filter);
+    },
+    async getLicenseAccepted() {
+      console.log('Loading license acceptance from store');
+      const f = await Plugins.Storage.get({ key: 'licenseAccepted' });
+      let s = Object.values(f);
+      if (s.length > 0) {
+        if (s[0] == 'true') {
+          this.licenseAccepted = true;
+        } else {
+          this.licenseAccepted = false;
+        }
+      } else {
+        this.licenseAccepted = false;
+      }
+
+      console.log('licenseAccepted: ', this.licenseAccepted);
+
+      if (!this.licenseAccepted) {
+        this.openLicenseAcceptanceDialog();
+      }
     },
     fetchTournaments() {
       console.log('fetching touraments');
@@ -424,6 +544,7 @@ export default {
       this.$router.go(-1);
     }, // end goBack()
   },
+  mounted: function() {},
   created: function() {
     document.addEventListener('backbutton', this.goBack, false);
 
@@ -436,6 +557,7 @@ export default {
       this.eventHandlerRedisplayTournamentList
     );
 
+    this.getLicenseAccepted();
     this.getTournamentFilter();
     this.getTournamentDisplay();
     this.fetchTournaments();

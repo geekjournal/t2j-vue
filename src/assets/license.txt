@@ -1,0 +1,87 @@
+
+      <div class="mb2 tc b">
+        Terms & Conditions
+      </div>
+      <div class="pa2">
+        The terms and conditions of this website are governed by the laws of the
+        United States of America and the laws of the State of Texas. This
+        website and all of its contents are intended as an example-only. This
+        website is not guranteed to be fit for any specific purpose or use. Use
+        at your own risk. No products or services are offered to, nor are for
+        sale to, minors or anyone under 18 years of age. Content within this
+        site may be goverened by terms and conditions of the source site, e.g.
+        usta.com. Curators, owners, or others who have participated in the
+        creation of this website, are not responsible for any errors in content.
+        Although we attempt to provide relevant information to our target
+        audience, we do not warrant that the information provided is accurate,
+        complete, or suitable for any purpose.
+      </div>
+      <div class="pa2">
+        In the event a disagreement between you and us arise, you agree to first attempt to resovle any issues or complaints directly with us. In th event that legal intervention is required, you agree to resolve any issue using arbitration in the state of Texas, where we (not you) select the arbitor, location, date, and time.  Further, you agree to be bound by any outcomes, decisions, or other arrangements provided through arbitration.
+      </div>
+
+      <div class="pa2">
+        You agree not to reverse engineering, borrow, or use any code, scripts, or other technical aspects of this site.  You agree not to improperly access, infiltrate, or attempt to intrude any of the website and systems in a manner not consistent with normal browser user usage.
+      </div>
+
+      <div class="pa2">
+        Some content provided on this website comes from "scrapping" content from ohter websites. We have contacted those 3rd party websites and received permission to do so. Any attempt by you to reproduce or copy this content may violate the terms and conditions of their website. By agreeing to these terms, you agree to be bound by the terms of usta.com. If you are unfamiliar with their terms, please Decline and do not use this site. The usta.com terms and conditions and link to privacy policy can be found at: https://www.usta.com/en/home/about-usta/who-we-are/national/usta-terms-of-use.html
+      </div>
+
+      <div class="pa2 mb2">
+        This website and its design are Copyright © 2020 - present.
+      </div>
+
+      <div class="tc mb2 b">
+        Privacy Policy
+      </div>
+
+      <div class="pa2">
+        Any information submitted through a form on this website will pass
+        through various internet servers, most of which are 3rd party and not
+        affiliated with this site. The contents of information submitted may not
+        be encrypted or securely stored, and it is unknown who within or if
+        those 3rd parties are able to or will access any information submitted.
+        It is also unknown whether information will be permanently stored on any
+        3rd party system. This site receives and stores information submitted to
+        us through this site or email address, including but not limited to,
+        notifications from form submissions that arrive to us by 3rd party
+        messaging services. We use and retain the information for purposes of
+        anaylzing and responding to prospective interest in our offerings and/or
+        responding to current or prospective use-based inqueries. Information
+        submitted may be retained for the useful life of this website, except
+        where we are legally obligated not to do so, and we may contact you in
+        the future for purposes of marketing products and services, or following
+        up directly with sales, support, or other inqueries. We welcome anyone
+        to contact us to request that any personal information about them be
+        permanently removed from our systems, but know that we can not be held
+        responsible nor will we attempt to ensure any personal data is removed
+        from 3rd party systems that are beyond our control. In case of a request
+        to permanently delete data, we will make a resonable attempt to only
+        retain someone's information if we are (a) legally required to do so, or
+        (b) must retain the information for purposes that support any ongoing
+        business operations such as any past, present, or known future business
+        purpose that may require us to retain the submitted inforation (e.g. we
+        may retain name, email address, and other contact information related to
+        an account receivable due in support of ongoing business operations, or
+        information that may be advised by our legal counsel to retain in
+        support of litigation or potential litigation matters). When not legally
+        restricted from doing so, we may share your information we receive with
+        other developers, contrators, or others affiliated with providing
+        operation of this website and systems. We don't sell or license
+        personally identifiable data collected through this website or systems
+        to 3rd parties at this time, and while we currently have no future plans
+        to do so, we can not foresee all the future circumstances that may arise
+        that could be of interest in establishing a business venture; therefore,
+        we reserve the right to share information we collect in the future.
+      </div>
+      <div class="pa2">
+        We use local browser storage and/or session storage to provide
+        functionality of this site to you. Localstorage/sessionStorage data are
+        not sent back to our servers. We may at times use cookies. Cookies may
+        be used to track and individually identify website usage and involve
+        sending data back to our servers. If an account login option is
+        provivded, then usage of the individual user data of the logged in user
+        may be tracked for purposes of identifying website and system usage,
+        development of new features, and other improvements.
+      </div>
