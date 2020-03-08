@@ -1,0 +1,100 @@
+@tailwind base;
+
+// @import url('https://fonts.googleapis.com/css?family=Nunito+Sans:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap')
+// @import url('https://fonts.googleapis.com/css?family=Roboto:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap')
+@import url('https://fonts.googleapis.com/css?family=Roboto|Nunito+Sans:400,400i,500,500i,600,600i,700,700i,800,800i&display=swap')
+// @import url('https://fonts.googleapis.com/css?family=Roboto:400,400i,500,500i,600,600i,700,700i,800,800i&display=swap')
+
+@css {
+
+
+}
+
+@tailwind components;
+@tailwind utilities;
+
+@css {
+  .outline {
+    @apply border border-black;
+  }
+
+  .outline-white {
+    @apply border-2 border-white;
+  }
+
+  .outline-red {
+    @apply border-2 border-red-500;
+  }
+
+  .outline-green {
+    @apply border-2 border-green-500;
+  }
+
+  .outline-pink {
+    @apply border-2 border-pink-400;
+  }
+
+  .edxt-text-shadow {
+    text-shadow: 4px 4px 4px #aaa;
+  }
+
+  .p-gray {
+    @apply font-normal font-nunitosans text-lg text-gray-700 antialiased;
+  }
+
+
+  /* basic modern patch */
+
+  #reset-this-root {
+      all: initial;
+      * {
+          all: unset;
+      }
+  }
+
+  .slant-2 {
+    clip-path: polygon(
+      0 0,
+      100% 0,
+      100% 100%,
+      0 calc(100% - 1vw)
+    );
+  }
+
+  .slant-2 {
+    clip-path: polygon(
+      0 0,
+      100% 0,
+      100% 100%,
+      0 calc(100% - 2vw)
+    );
+  }
+
+  .slant-3 {
+    top: -10vh;
+    clip-path: polygon( /* 4-sided polygon */
+      0 0, /* %right, %down */
+      100% 0, /* %right, %down */
+      100% 100%, /* %right, %down */
+      0 calc(100% - 3vw)
+    );
+  }
+
+  .slant-4 {
+    clip-path: polygon(
+      0 0,
+      100% 0,
+      100% 100%,
+      0 calc(100% - 4vw)
+    );
+  }
+
+  .zoom {
+    transition: transform .1s; /* Animation */
+  }
+
+  .zoom:hover {
+    transform: scale(1.05); /* (% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+  }
+
+}

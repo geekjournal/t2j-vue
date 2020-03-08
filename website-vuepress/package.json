@@ -1,0 +1,31 @@
+{
+  "name": "fortylove.net",
+  "version": "1.0.0",
+  "description": "Fortylove.net Website",
+  "scripts": {
+    "dev": "vuepress dev src",
+    "build": "vuepress build src",
+    "eject": "vuepress eject",
+    "serve": "vuepress dev src",
+    "serve-release": "serve ./src/.vuepress/dist"
+  },
+  "keywords": [
+    "keywords"
+  ],
+  "author": "geekjournal",
+  "repository": {
+    "type": "git",
+    "url": "https://https://github.com/geekjournal/t2j-vue"
+  },
+  "devDependencies": {
+    "@fullhuman/postcss-purgecss": "^2.1.0",
+    "autoprefixer": "^9.7.4",
+    "postcss-import": "^12.0.1",
+    "postcss-loader": "^3.0.0",
+    "tailwindcss": "^1.2.0",
+    "vuepress": "^1.3.1",
+    "vuepress-plugin-reading-time": "^0.1.1",
+    "webpack": "^4.42.0"
+  },
+  "dependencies": {}
+}

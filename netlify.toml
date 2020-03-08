@@ -1,0 +1,13 @@
+# See: https://www.netlify.com/docs/netlify-toml-reference/
+# These values are used for production deployment. To override
+#   for local development, you can create a .env.local file
+# VUE_APP_NETLIFY=true is necessary in this netlify.toml
+#  file only, as it sets the baseURL in vue.config.js
+#  properly for Netlify, otherwise it defaults to something else
+[build.environment]
+  VUE_APP_NETLIFY=true
+  VUE_APP_BASE_URL="/tournaments/"
+
+[build]
+# Default build command.
+  command = "npm run build-release"

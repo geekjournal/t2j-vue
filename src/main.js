@@ -8,9 +8,10 @@ import Vue from 'vue';
 import App from './App.vue';
 import router from './router';
 import resource from 'vue-resource';
-import Vue2Touch from 'vue2-touch';
+// import Vue2Touch from 'vue2-touch';
 import VueObserveVisibility from 'vue-observe-visibility';
 import VModal from 'vue-js-modal';
+import VueMeta from 'vue-meta';
 
 // import './../node_modules/jquery/dist/jquery.min.js';
 // import './../node_modules/bootstrap/dist/css/bootstrap.min.css';
@@ -47,9 +48,13 @@ Vue.config.ignoredElements = [/^ion-/];
 
 Vue.config.productionTip = false;
 Vue.use(resource);
-Vue.use(Vue2Touch);
+// Vue.use(Vue2Touch);
 Vue.use(VueObserveVisibility);
 Vue.use(VModal);
+Vue.use(VueMeta, {
+  // optional pluginOptions
+  // refreshOnceOnNavigation: true,
+});
 
 // Create a global message bus for passing messages between peer components and views
 export const messageBus = new Vue();

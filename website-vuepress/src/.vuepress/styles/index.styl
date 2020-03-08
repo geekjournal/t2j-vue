@@ -1,0 +1,89 @@
+@require './twcss';
+
+  @css {
+
+
+} /* end of @css block*/
+
+/**
+  Unset theme-default CSS for heading tags
+**/
+
+h1, h2, h3, h4, h5, h6
+  font-weight 600
+  line-height 1.25
+  // padding-bottom 1rem
+
+  &:hover .header-anchor
+    opacity: 0
+
+h1
+  font-size 2.2rem
+
+h2
+  font-size 1.65rem
+  border-bottom 0px solid $borderColor
+
+h3
+  font-size 1.35rem
+
+ul, ol
+  padding-bottom: 20px;
+  padding-left: 30px;
+  margin-top: -25px;
+  font-size 1.15rem
+
+ul
+  list-style-type: disc
+
+ol
+  list-style-type: decimal
+
+h1, h2, h3, h4, h5, h6
+  + ul, + ol
+    margin-top: .75rem
+
+p, ul, ol
+  line-height 1.7
+
+li ul li:first-child
+  margin-top: 25px;
+
+li ul li:last-child
+  margin-bottom: -20px;
+
+a
+  color $accentColor
+  // color theme('colors.edxt-primary.default')
+  &:hover
+    color theme('colors.edxt-primary.darker')
+
+blockquote
+  font-size 1rem
+  color #999;
+  border-left .2rem solid #dfe2e5
+  margin 1rem 0
+  padding .25rem 0 .25rem 1rem
+
+  & > p
+    margin 0
+
+// narrow mobile
+$contentClass = '.theme-default-content'
+$mobileSidebarWidth = $sidebarWidth * 0.82
+@media (max-width: $MQMobileNarrow)
+  h1
+    font-size 1.9rem
+  {$contentClass}
+    div[class*="language-"]
+      margin 0.85rem -1.5rem
+      border-radius 0
+
+  h2
+    font-size 1.5rem
+
+  h3
+    font-size 1.3rem
+
+
+

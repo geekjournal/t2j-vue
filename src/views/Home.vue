@@ -287,6 +287,16 @@ import { filters } from '@/main';
 
 export default {
   name: 'Home',
+  metaInfo: {
+    meta: [
+      { charset: 'utf-8' },
+      {
+        name: 'viewport',
+        content:
+          'width=device-width, initial-scale=1.0, maximum-scale=3.0, minimum-scale=0.5, user-scalable=yes',
+      },
+    ],
+  },
   data() {
     return {
       apiURLbase: 'https://api.geekjournal.com',

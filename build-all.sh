@@ -13,6 +13,7 @@ echo "done! ${hash}"
 # sed -i '' "s/appGitVersion:\s*.*[^,]/appGitVersion: '${var}'/g" ./src/App.vue
 
 npm run build-release
+npx cap copy
 
 # now set redirects for Netlify
 echo "Copying _redirects to /dist..."
