@@ -21,6 +21,8 @@ echo "🎾 done! ${hash}"
 
 echo "🎾 Building website ..."
 cd ./website-vuepress
+echo "🎾 PWD: "
+pwd
 
 if [ ! -d "./node_modules" ]
 then
@@ -29,7 +31,7 @@ then
     echo "  🎾 Done!"
 fi
 
-vuepress build src
+npm run build
 cd ..
 # see https://askubuntu.com/questions/86822/how-can-i-copy-the-contents-of-a-folder-to-another-folder-in-a-different-directo
 echo "🎾 Done! Website built to ./website-vuepress/src/.vuepress/dist/"
@@ -41,14 +43,19 @@ echo "🎾 Done! Website built to ./website-vuepress/src/.vuepress/dist/"
 
 # sed is different from mac and linux, so not using this method anymore
 # sed -i '' "s/appGitVersion:\s*.*[^,]/appGitVersion: '${var}'/g" ./src/App.vue
-
+echo "🎾 Building tournament app ..."
+echo "🎾 PWD: "
+pwd
 npm run build
+echo "🎾 Done! Tournament app finished building."
 
 ########################
 # Copy website into root deployment folder
 ########################
 
 echo "🎾 Copying vuepress website into tournament website folder ..."
+echo "🎾 PWD: "
+pwd
 cp -a ./website-vuepress/src/.vuepress/dist/. ./dist/
 # see https://askubuntu.com/questions/86822/how-can-i-copy-the-contents-of-a-folder-to-another-folder-in-a-different-directo
 echo "🎾 Done! Website deployed to ./dist/"
