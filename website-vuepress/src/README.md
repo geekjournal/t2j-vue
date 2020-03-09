@@ -3,7 +3,8 @@ home: true
 # heroImage: /hero.png
 # heroImage: https://images.unsplash.com/photo-1520992048127-03c7e5176a4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2901&q=80
 heroText: Better Tournament Navigation
-tagline: For members of The Traveling Circus
+# tagline: For members of The Traveling Circus
+tagline: For Texas Adult Tennis Tournament Players
 actionText: Get Started →
 actionLink: ./tournaments/
 features:
@@ -13,7 +14,7 @@ features:
     details: Navigate to specific Draws, Results, or Important tournament information in less clicks. Filter by points, starred favorites, or choose to only see major zones.
   - title: Searchable
     details: Find tournaments by city, point value, name, or date. Use the side menu to jump to Rankings/Records and Ratings at USTA or quickly access the Rules of Tennis for any on-court disputes.
-footer: Made with ❤️by a tennis enthusiast | FortyLove.net
+footer: Made with ❤️ by a tennis enthusiast | © FortyLove.net
 ---
 
 <!-- <div class="text-center text-2xl">

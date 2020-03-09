@@ -5,6 +5,7 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build --dest dist/tournaments",
+	"build-web":"cd website-vuepress && vuepress dev src",
     "build-release": "./build-release.sh",
     "build-android": "./build-all.sh",
     "serve-release": "serve ./dist",
