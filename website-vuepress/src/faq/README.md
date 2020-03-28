@@ -12,7 +12,8 @@ Starred favorites currently use local browser storage. Any time you clear your b
 
 ## I can't pinch ZOOM in on the tournament info, and the text is too small
 
-I am aware of this and I've been working on a technical solution, but it will likely require a complete rewrite of the app. In the mean time, you can bump up the text size in your browser, or try turning your mobile into landscape mode. For those of us with poor up-close vision, I'll continue working on a solution. Let me know if this feature is important to you.
+You can change the font size by going to the main menu and sellecting `Settings`.
+From there you can change the font size. Pinch-to-zoom can be enabled in most browsers (as an override). Google search "enable pinch-to-zoom in chrome on android"
 
 ## Is this site affilliated with the USTA?
 
