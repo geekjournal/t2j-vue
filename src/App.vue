@@ -161,14 +161,14 @@
           </div>
         </div>
 
-        <!-- <div class="cf pv2 bt grow" @click="goToSettings">
+        <div class="cf pv2 bt grow" @click="goToSettings">
           <div class="fl w-20 tc">
             <ion-icon name="settings" style="font-size: 25px;"></ion-icon>
           </div>
           <div class="fr w-80 f4">
             Settings
           </div>
-        </div> -->
+        </div>
 
         <div
           class="cf pv2 bt grow pointer"
@@ -350,7 +350,10 @@ export default {
       open(url, '_blank');
       this.closeMainMenu();
     },
-    goToSettings() {},
+    goToSettings() {
+      this.closeMainMenu();
+      this.$router.push('settings');
+    },
     eventHandlerRefreshTournamentList(msg) {
       console.log('Received Refresh Tournaments EVENT: ', msg);
       this.fetchTournaments();

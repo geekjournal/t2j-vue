@@ -241,12 +241,20 @@
             class="fl w-90 bg-white mv1 pl2 pv2"
             @click="tournamentClicked(t)"
           >
-            <span class="f5 b dark-gray mw-80">{{ t.name }}</span>
+            <span
+              class="b dark-gray mw-80"
+              :style="{ 'font-size': fontSize + 'rem' }"
+              >{{ t.name }}</span
+            >
             <br />
-            <span class="f5 mid-gray">{{ t.date }} - {{ t.location }}</span>
+            <span class="mid-gray" :style="{ fontSize: fontSize + 'rem' }"
+              >{{ t.date }} - {{ t.location }}</span
+            >
             <br />
             <!-- <span class="mid-gray">{{ getDeadline(t) }}</span> -->
-            <span class="mid-gray"><span v-html="getDeadline(t)" /> </span>
+            <span class="mid-gray" :style="{ 'font-size': fontSize2 + 'rem' }"
+              ><span v-html="getDeadline(t)" />
+            </span>
             <br />
             <!-- <span class="f7 mid-gray">status: {{t.status}}</span> -->
           </div>
@@ -302,6 +310,8 @@ export default {
       apiURLbase: 'https://api.geekjournal.com',
       tournaments: [],
       items: ['a', 'b', 'c'],
+      fontSize: 1,
+      fontSize2: 0.75,
       search: false,
       searchText: '',
       // favorites: []
@@ -396,6 +406,27 @@ export default {
     },
     isFavorite(ID) {
       return this.$parent.favorites.indexOf(ID) > -1 ? true : false;
+    },
+    async getFontSize() {
+      console.log('Loading fontSize from store');
+      const f = await Plugins.Storage.get({ key: 'fontSize' });
+      let s = Object.values(f);
+      if (s.length > 0) {
+        if (s[0] != null) {
+          this.fontSize = Number(s[0]);
+        }
+      }
+      console.log('fontSize: ', this.fontSize);
+
+      console.log('Loading fontSize2 from store');
+      const f2 = await Plugins.Storage.get({ key: 'fontSize2' });
+      s = Object.values(f2);
+      if (s.length > 0) {
+        if (s[0] != null) {
+          this.fontSize2 = Number(s[0]);
+        }
+      }
+      console.log('fontSize2: ', this.fontSize2);
     },
     async storeFavorites() {
       console.log('Storing favorites: ', this.$parent.favorites.toString());
@@ -508,9 +539,7 @@ export default {
 
         if (deadDate < today || diffDays > 10) {
           // return "deadline: " + t.deadline ;
-          return (
-            "<span class='f7'>" + 'enter by: ' + t.entries_close + '</span>'
-          );
+          return "<span class=''>" + 'enter by: ' + t.entries_close + '</span>';
         } else {
           return (
             "<span class='red'>" + 'enter by: ' + t.entries_close + '</span>'
@@ -528,9 +557,14 @@ export default {
 
       // return "hello";
     },
+    eventHandlerLoadSettings() {
+      this.getFontSize();
+    },
   }, // end methods:
   created: function() {
     this.getFavoritesFromStore();
+    this.getFontSize();
+    messageBus.$on('settings-change', this.eventHandlerLoadSettings);
   }, // end created:
   updated: function() {},
   components: {},
