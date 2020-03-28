@@ -15,6 +15,7 @@ features:
   - title: Searchable
     details: Find tournaments by city, point value, name, or date. Use the side menu to jump to Rankings/Records and Ratings at USTA or quickly access the Rules of Tennis for any on-court disputes.
 footer: Made with ❤️ by a tennis enthusiast | © FortyLove.net
+search: false
 ---
 
 <!-- <div class="text-center text-2xl">
