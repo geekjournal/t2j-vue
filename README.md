@@ -32,3 +32,7 @@ npm run lint
 1. `npm run build-release`
 1. // `npx cap copy` now done inside build-release
 1. `npx cap open android`
+
+# Site Colors
+
+Background:  either #34ae3c  or   #00a300 (the Windows tile color for green)
