@@ -42,6 +42,13 @@ module.exports = {
     [
       'meta',
       {
+        property: 'og:image',
+        content: 'og-image.png',
+      },
+    ],
+    [
+      'meta',
+      {
         name: 'msapplication-TileColor',
         content: '#00a300',
       },
