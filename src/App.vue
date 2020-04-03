@@ -11,23 +11,28 @@
       name="dialog"
       :scrollable="false"
       height="auto"
-      :max-height="600"
-      :max-width="600"
+      :max-height="400"
+      :max-width="375"
       :adaptive="true"
       :clickToClose="false"
     >
       <div style="overflow-y: auto; height: 300px;">
-        <div class="mb2 b pa2">
-          NOTE: YOU MUST READ AND AGREE TO THE TERMS AND PRIVACY POLICY TO
-          CONTINUE. SCROLL DOWN TO READ THE FULL TEXT.
-        </div>
-        <span v-html="licenseText"></span>
         <div class="pa2 b">
-          By clicking "Accept" below, you are agreeing to abide by and be bound
-          to the provided Terms & Conditions and Privacy Policy. If you do not
-          wish to accept these terms, press "Decline." If you Decline, you are
-          acknowleging that you will not use this website and/or systems
-          affialiated with this site.
+          SUMMARY TERMS :
+        </div>
+        <div class="pt2 pl4 mb2">
+          • You agree not to complain or sue
+          <br />
+          • I make no promises of any kind
+        </div>
+        <div>
+          <span v-if="showLicense" v-html="licenseText"></span>
+        </div>
+        <div class="pa2 b">
+          Click Accept only if you agree to the<br />
+          <div class="blue u" @click="showLicense = true">
+            Full Terms and Privacy Policy
+          </div>
         </div>
       </div>
       <div class="ba tc bg-light-gray">
@@ -42,7 +47,7 @@
     <ion-menu side="start">
       <ion-header>
         <ion-toolbar color="secondary">
-          <ion-title>Circus Menu</ion-title>
+          <ion-title>Menu</ion-title>
           <!-- <ion-icon name="close" @click="closeMainMenu" style="font-size: 25px;"></ion-icon> -->
         </ion-toolbar>
       </ion-header>
@@ -251,6 +256,7 @@ export default {
       favorites: [],
       licenseAccepted: false,
       licenseText: LicenseText,
+      showLicense: false,
     };
   },
   methods: {
@@ -287,7 +293,7 @@ export default {
       this.licenseAccepted = false;
       this.storeLicenseAccepted();
       this.$modal.hide('dialog');
-      location.replace('https://dev-t2j.netlify.com');
+      location.replace('https://fortylove.net');
     },
     openLicenseAcceptanceDialog() {
       this.$modal.show('dialog');

@@ -2,9 +2,7 @@
   <ion-app>
     <ion-header>
       <ion-toolbar color="primary">
-        <ion-title>
-          The Traveling Circus | Detail
-        </ion-title>
+        <ion-title> Tournament Detail </ion-title>
         <!-- <ion-buttons slot="end">
       <ion-button @click="this.$parent.openMainMenu">
         <ion-icon name="md-menu" style="font-size: 25px;"></ion-icon>

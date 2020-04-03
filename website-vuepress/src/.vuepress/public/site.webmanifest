@@ -3,18 +3,18 @@
     "short_name": "FortyLove",
     "icons": [
         {
-            "src": "/android-chrome-192x192.png?v=47B4Y9oP24",
+            "src": "/android-chrome-192x192.png",
             "sizes": "192x192",
             "type": "image/png"
         },
         {
-            "src": "/android-chrome-512x512.png?v=47B4Y9oP24",
+            "src": "/android-chrome-512x512.png",
             "sizes": "512x512",
             "type": "image/png"
         }
     ],
-    "theme_color": "#34ae3c",
-    "background_color": "#34ae3c",
+    "theme_color": "#2c66ff",
+    "background_color": "#2c66ff",
     "start_url": "https://fortylove.net",
     "display": "standalone"
 }

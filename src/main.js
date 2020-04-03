@@ -17,7 +17,7 @@ import VueMeta from 'vue-meta';
 // import './../node_modules/bootstrap/dist/css/bootstrap.min.css';
 // import './../node_modules/bootstrap/dist/js/bootstrap.min.js';
 import './../node_modules/tachyons/css/tachyons.css';
-// import '@/assets/styles.css';
+import '@/assets/styles.css';
 
 import { Plugins } from '@capacitor/core';
 import { platform } from 'os';
@@ -54,6 +54,14 @@ Vue.use(VModal);
 Vue.use(VueMeta, {
   // optional pluginOptions
   // refreshOnceOnNavigation: true,
+});
+
+Vue.mixin({
+  data() {
+    return {
+      appTitle: '🎾 Texas Tournaments',
+    };
+  },
 });
 
 // Create a global message bus for passing messages between peer components and views

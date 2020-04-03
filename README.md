@@ -35,4 +35,9 @@ npm run lint
 
 # Site Colors
 
-Background:  either #34ae3c  or   #00a300 (the Windows tile color for green)
+Green Background:
+either #34ae3c or #00a300 (the Windows tile color for green)
+
+Background blue:
+Tournaments: RGB 44,102,255 => #2c66ff (lighter, this one, looks better for favicon)
+Website-Vuepress: RGB 49,90,255 => #315aff

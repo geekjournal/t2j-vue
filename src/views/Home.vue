@@ -4,7 +4,7 @@
     <ion-header>
       <ion-toolbar color="primary">
         <ion-title v-show="!search">
-          The Traveling Circus
+          {{ appTitle }}
         </ion-title>
 
         <ion-buttons slot="start" v-show="search">

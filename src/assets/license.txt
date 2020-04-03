@@ -17,15 +17,15 @@
         complete, or suitable for any purpose.
       </div>
       <div class="pa2">
-        In the event a disagreement between you and us arise, you agree to first attempt to resovle any issues or complaints directly with us. In th event that legal intervention is required, you agree to resolve any issue using arbitration in the state of Texas, where we (not you) select the arbitor, location, date, and time.  Further, you agree to be bound by any outcomes, decisions, or other arrangements provided through arbitration.
+        First and foremost, you agree not bring any complaint against this website, it's creators, hosting companies or services, consultants, or anyone else in any way affiliated with this site.  In the event a disagreement between you and us arise, you agree to first attempt to resovle any issues or complaints directly with us. In th event that legal intervention is required, you agree to resolve any issue using arbitration in the state of Texas, where we (not you) select the arbitor, location, date, and time of arbitration.  Further, you agree to be bound by any outcomes, decisions, or other arrangements provided through arbitration.
       </div>
 
       <div class="pa2">
-        You agree not to reverse engineering, borrow, or use any code, scripts, or other technical aspects of this site.  You agree not to improperly access, infiltrate, or attempt to intrude any of the website and systems in a manner not consistent with normal browser user usage.
+        You agree not to reverse engineer, borrow, or use any code, scripts, or other technical aspects of this site.  You agree not to improperly access, infiltrate, or attempt to intrude any of the website and systems in a manner not consistent with normal browser user usage.
       </div>
 
       <div class="pa2">
-        Some content provided on this website comes from "scrapping" content from ohter websites. We have contacted those 3rd party websites and received permission to do so. Any attempt by you to reproduce or copy this content may violate the terms and conditions of their website. By agreeing to these terms, you agree to be bound by the terms of usta.com. If you are unfamiliar with their terms, please Decline and do not use this site. The usta.com terms and conditions and link to privacy policy can be found at: https://www.usta.com/en/home/about-usta/who-we-are/national/usta-terms-of-use.html
+        Some content provided on this website comes from "scrapping" content from other websites. We have contacted those 3rd party websites and received permission to do so. Any attempt by you to reproduce or copy this content may violate the terms and conditions of the 3rd party website. By agreeing to these terms, you agree to be bound by the terms of usta.com. If you are unfamiliar with their terms, please Decline and do not use this site. The usta.com terms and conditions and link to privacy policy can be found at: https://www.usta.com/en/home/about-usta/who-we-are/national/usta-terms-of-use.html
       </div>
 
       <div class="pa2 mb2">
@@ -78,10 +78,11 @@
       <div class="pa2">
         We use local browser storage and/or session storage to provide
         functionality of this site to you. Localstorage/sessionStorage data are
-        not sent back to our servers. We may at times use cookies. Cookies may
-        be used to track and individually identify website usage and involve
-        sending data back to our servers. If an account login option is
-        provivded, then usage of the individual user data of the logged in user
-        may be tracked for purposes of identifying website and system usage,
-        development of new features, and other improvements.
+        not sent back to our servers, but this data could be sent back to our servers in the future.
+        We may at times use cookies. Cookies may
+        be used to track and individually identify you, your website usage (of this and other sites),
+        or used for development of new features or other improvements. The use of cookies involvs
+        sending data back to our servers and/or 3rd party servers (e.g. many websites use cookies that
+        transmit data to FaceBook for purpose of serving up targetted adds and collecting your personal
+        web browsing usage). Cookies are often used to personally identify and your browsing habbits.
       </div>

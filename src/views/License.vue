@@ -2,9 +2,7 @@ cd<template>
   <ion-app>
     <ion-header>
       <ion-toolbar color="primary">
-        <ion-title>
-          The Traveling Circus | License
-        </ion-title>
+        <ion-title> License </ion-title>
         <ion-buttons slot="start">
           <ion-button @click="goBackHome()">
             <ion-icon name="arrow-back" style="font-size: 25px;"></ion-icon>
