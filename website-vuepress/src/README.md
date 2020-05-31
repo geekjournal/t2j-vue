@@ -10,7 +10,7 @@ actionLink: ./tournaments/
 features:
   - title: Simple
     details: No app to install.  View Texas Adult Tournaments sourced directly from USTA's tournament data. See up-and-comming tournaments, approaching entry deadlines, or past tournaments.
-  - title: Fast
+  - title: Fast, Mobile Friendly
     details: Navigate to specific Draws, Results, or Important tournament information in less time. Filter by points, starred favorites, or choose to only see major zones.
   - title: Searchable
     details: Find tournaments by city, point value, name, or date. Use the side menu to jump to Rankings/Records and Ratings at USTA or quickly access the Rules of Tennis for any on-court disputes.
