@@ -25,7 +25,7 @@ module.exports = {
   themeConfig: {
     nav: [
       { text: 'Home', link: '/' },
-      { text: 'Tournaments', link: './tournaments/' },
+      { text: 'Tournaments', link: '/tournaments/' },
       { text: 'FAQ', link: '/faq/' },
       // { text: 'Contact', link: '/contact/' },
       // { text: 'Blog', link: '/blog/' },
