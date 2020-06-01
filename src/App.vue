@@ -63,6 +63,19 @@
     <ion-button shape="round" @click="removeFavoritesFromStore" full>Clear Favorites</ion-button>  -->
 
         <div
+          class="cf pv2 bb grow pointer"
+          @click="openExternalURL('https://fortylove.net')"
+        >
+          <div class="fl w-20 tc">
+            <!-- <ion-icon name="tennisball" style="font-size: 25px;"></ion-icon> -->
+            <span style="font-size: 25px;">🎾</span>
+          </div>
+          <div class="fr w-80 f4">
+            FortyLove.NET
+          </div>
+        </div>
+
+        <div
           class="cf pv2 grow pointer"
           @click="
             openExternalURL(
@@ -166,7 +179,7 @@
           </div>
         </div>
 
-        <div class="cf pv2 bt grow" @click="goToSettings">
+        <div class="cf pv2 bt grow pointer" @click="goToSettings">
           <div class="fl w-20 tc">
             <ion-icon name="settings" style="font-size: 25px;"></ion-icon>
           </div>
@@ -376,40 +389,40 @@ export default {
         case filters.SIX_HUNDRED:
           console.log('Filtering to 600');
           this.filteredTournaments = this.tournaments.filter(
-            t => t.points == '600'
+            (t) => t.points == '600'
           );
           console.log('Filtered tments: ', this.filteredTournaments);
           break;
         case filters.FOUR_HUNDRED:
           console.log('Filtering to 400');
           this.filteredTournaments = this.tournaments.filter(
-            t => t.points == '400'
+            (t) => t.points == '400'
           );
           console.log('Filtered tments: ', this.filteredTournaments);
           break;
         case filters.TWO_HUNDRED:
           console.log('Filtering to 200');
           this.filteredTournaments = this.tournaments.filter(
-            t => t.points == '200'
+            (t) => t.points == '200'
           );
           console.log('Filtered tments: ', this.filteredTournaments);
           break;
         case filters.ONE_HUNDRED:
           console.log('Filtering to 100');
           this.filteredTournaments = this.tournaments.filter(
-            t => t.points == '100'
+            (t) => t.points == '100'
           );
           console.log('Filtered tments: ', this.filteredTournaments);
           break;
         case filters.OTHER:
           console.log('Filtering to OTHER');
           this.filteredTournaments = this.tournaments.filter(
-            t => t.points == '?'
+            (t) => t.points == '?'
           );
           console.log('Filtered tments: ', this.filteredTournaments);
           break;
         case filters.FAVORITES:
-          this.filteredTournaments = this.tournaments.filter(t =>
+          this.filteredTournaments = this.tournaments.filter((t) =>
             this.favorites.indexOf(t.ID) > -1 ? true : false
           );
           break;
@@ -424,7 +437,7 @@ export default {
       switch (this.display) {
         case displays.UPCOMING:
           console.log('Display set to show upcoming');
-          this.filteredTournaments = this.filteredTournaments.filter(t => {
+          this.filteredTournaments = this.filteredTournaments.filter((t) => {
             let date = new Date(t.date);
             let now = new Date();
 
@@ -438,7 +451,7 @@ export default {
           break;
         case displays.PAST:
           console.log('Display set to show past');
-          this.filteredTournaments = this.filteredTournaments.filter(t => {
+          this.filteredTournaments = this.filteredTournaments.filter((t) => {
             let date = new Date(t.date);
             let now = new Date();
 
@@ -549,7 +562,7 @@ export default {
             this.tournaments = response.body;
             this.redisplayTournaments();
           },
-          response => {
+          (response) => {
             console.log('failed to get tournaments', response.body);
           }
         );
